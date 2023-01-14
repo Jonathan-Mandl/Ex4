@@ -21,6 +21,7 @@ void Command2::execute()
     if (parameters==""){
         return;
     }
+    
     else{
     stringstream s_stream(parameters);
     string sub_String1;   
