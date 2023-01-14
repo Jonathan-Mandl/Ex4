@@ -10,11 +10,11 @@ using namespace std;
 class Command{
     protected:
     string description;
-    StandardIO dio;
+    DefaultIO* dio;
 
     public:
     virtual void execute() = 0;
-
+    Command(string description, DefaultIO* dio);
 };
 
 

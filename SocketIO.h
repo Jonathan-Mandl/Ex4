@@ -1,7 +1,10 @@
 #include "DefaultIO.h"
 
 class SocketIO : public DefaultIO{
+    int client_sock;
+    
     public:
-    string read() override;
-    void write(string output) override;
+    SocketIO(int client_sock);
+    std::string read() override;
+    void write(std::string output) override;
 };

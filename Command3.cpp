@@ -5,6 +5,11 @@
 #include "Input.h"
 #include "Knn.h"
 
+Command3::Command3()
+{
+    this->description="classify data";
+}
+
 void Command3::execute(){
     string train_file;
     string test_file;
@@ -24,7 +29,7 @@ void Command3::execute(){
         Knn knn=Knn("AUC",5);
 
         knn.fit(features,labels);
-        
+
         string label=knn.predict(test_vectors[i]);
 
         test_labels.push_back(label);

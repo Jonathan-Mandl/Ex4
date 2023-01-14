@@ -1,4 +1,5 @@
 #include "StandardIO.h"
+using namespace std;
 
 string StandardIO::read(){
     string input;

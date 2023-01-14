@@ -9,11 +9,24 @@
 #include <string.h>
 #include <vector>
 #include <cmath>
-using namespace std;
+#include <thread>
 
 #include "Input.h"
 #include "Knn.h"
 #include "Server.h"
+
+#include "DefaultIO.h"
+#include  "SocketIO.h"
+#include "CLI.h"
+
+using namespace std;
+
+// this is called from a new thread, so it's run in parallel
+void handleClient(int client_sock) {
+    SocketIO sio(client_sock);
+    CLI cli(&sio);
+    cli.start();
+}
 
 /*
 The Server class initialized by string file name, const int server port. 
@@ -209,8 +222,12 @@ int main(int argc, char* argv[])
 
     while (true)
     {
-    int client_sock=server.acceptClient(sock);
-    server.clientRequest(client_sock);
+        int client_sock=server.acceptClient(sock);
+
+        //server.clientRequest(client_sock);
+
+        thread t(handleClient, client_sock);
+        t.detach();
     }
 
 

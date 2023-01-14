@@ -3,9 +3,13 @@
 #include "StandardIO.h"
 #include <fstream>
 
-Command1::Command1()
+Command1::Command1(DefaultIO* dio, 
+            std::vector<std::vector<double>>& Xexamples,
+            std::vector<std::string>& Yexamples,
+            std::vector<std::vector<double>>& XtoClassify) 
+            : Command("upload an unclassified csv data file", dio),
+            Xexamples(Xexamples), Yexamples(Yexamples), XtoClassify(XtoClassify)
 {
-    this->description="upload an unclassified csv data file";
     this->test_file="";
     this->train_file="";
 }
