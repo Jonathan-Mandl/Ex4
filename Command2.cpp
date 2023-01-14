@@ -10,6 +10,7 @@ Command2::Command2()
 {
     this->k=5;
     this->distance_metric="AUC";
+    this->description="algorithm settings";
 }
 
 void Command2::execute()

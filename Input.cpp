@@ -90,3 +90,29 @@ vector<double> Input::inputVec(int size)
  }
 return vec1;
 }
+
+void Input::readTestVec(vector<vector<double>>& vectors, string test_file)
+{
+     fstream fin;
+    //open csv file with specific path as file_name
+    fin.open(test_file, ios::in);
+    string line;
+
+    // Read the CSV file line by line
+    while (getline(fin, line)) {
+        // Create a vector to store the values in the current line
+        vector<double> values;
+
+        // Use a stringstream to extract the values from the line
+        stringstream ss(line);
+        string value;
+        while (getline(ss, value, ',')) {
+            // Convert the value to a double and add it to the values vector
+            values.push_back(stod(value));
+        }
+
+        // Add the values vector to the vectors vector
+        vectors.push_back(values);
+    }
+
+}
