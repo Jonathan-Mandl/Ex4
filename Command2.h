@@ -8,9 +8,9 @@ using namespace std;
 
 
 class Command2 : public Command{
-    int k;
-    string distance_metric;
+    int& k;
+    string& metric;
     public:
-    Command2();
+    Command2(DefaultIO* dio,int& k,string& metric);
     void execute() override;
 };
