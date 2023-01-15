@@ -36,5 +36,7 @@ void Command3::execute(){
 
         Yresults.push_back(label);
     }
+
+    dio->write("classifying data complete");
     
 }
