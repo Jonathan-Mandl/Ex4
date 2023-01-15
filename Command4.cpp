@@ -1,8 +1,11 @@
 
 #include "Command4.h"
-Command4::Command4()
+
+
+Command4::Command4(DefaultIO* dio,std::vector<std::string>& Yresults)
+: Command("display results",dio), Yresults(Yresults)
 {
-    this->description="display results";
+    
 }
 
 void Command4::execute()

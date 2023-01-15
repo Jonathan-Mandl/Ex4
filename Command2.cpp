@@ -16,7 +16,7 @@ metric(metric), k(k)
 
 void Command2::execute()
 {
-    this->dio->write("The current KNN parameters are: k= "+ to_string(this->k) + ", distance metric = "+ this->distance_metric);
+    this->dio->write("The current KNN parameters are: k= "+ to_string(this->k) + ", distance metric = "+ this->metric);
     //user should enter k, space and then distance metric name.
     string parameters = this->dio->read();
     if (parameters==""){

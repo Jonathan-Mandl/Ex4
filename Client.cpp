@@ -54,14 +54,9 @@ In the funcion we creat buffer to insert it the user inputs. we use for that in 
 after that the function send the buffer to server by the socket number.
 */
 
-void Client::serverSend(int sock,vector<double>& vec,string& metric,int& k)
+void Client::serverSend(int sock,string input)
 {
-char buffer[4096];
-
-this->serialize(buffer,vec,metric,k);
-  
-int buffer_size= sizeof(buffer);
-int sent_bytes= send(sock, buffer, buffer_size,0);
+int sent_bytes= send(sock, input.c_str(), input.size(),0);
 if (sent_bytes<0)
 {
 perror("error sending information to server.");
@@ -75,33 +70,13 @@ The printLabel function get as input the socket number and use it to recive from
 after the function connect to the server and recive the lable we print it.
 */
 
-void Client::printLabel(int sock)
+string Client::receive(int sock)
 {
-string label;
-char* buf = &label[0];
-int read_bytes = recv(sock, buf, 30, 0);
-label[read_bytes]='\0';
-
-if (read_bytes ==0)
-{
-perror("connection closed"); 
-exit(1);
-}
-else if (read_bytes<0)
-{
-    perror("no information recieved from server");
-    exit(1);
-}
-else{
-
-if (buf=="Invalid Input")
-{
-    cout<<"Invalid Input"<<endl;
-}
-else{
-cout<<buf<<endl;
-}
-}
+string output;
+char buffer[4096];
+int expected_data_len= sizeof(buffer);
+int read_bytes = recv(sock, buffer, expected_data_len, 0);
+return output;
 }
 
 
@@ -146,16 +121,7 @@ int sock=client.serverConnect();
 
 while(true)
 {
-vector<double> vec;
-string metric;
-int k;
 
-
-if (client.input(sock,vec,metric,k))
-{
-client.serverSend(sock,vec,metric,k);
-client.printLabel(sock);
-}
 
 }
 }
