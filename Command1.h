@@ -7,10 +7,6 @@ using namespace std;
 #include "Command.h"
 
 class Command1 : public Command{
-    string train_file;
-    string test_file;
-    string get_train();
-    string get_test();
 
     std::vector<std::vector<double>>& Xexamples;
     std::vector<std::string>& Yexamples;

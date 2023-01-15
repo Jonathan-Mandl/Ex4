@@ -10,15 +10,11 @@ class Server{
 
 public:
 
-Server(string file_name, const int server_port);
-
-void deserialize(const char* buffer, vector<double>& vec, string& metric, int& k);
+Server(const int server_port);
 
 int createSock();
 
 int acceptClient(int sock);
-
-void clientRequest(int client_sock);
 
 
 };

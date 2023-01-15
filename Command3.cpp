@@ -5,34 +5,36 @@
 #include "Input.h"
 #include "Knn.h"
 
-Command3::Command3()
+Command3::Command3(DefaultIO* dio, 
+            std::vector<std::vector<double>>& Xexamples,
+            std::vector<std::string>& Yexamples,
+            std::vector<std::vector<double>>& XtoClassify,
+            std::vector<std::string>& Yresults,
+            std::string& metric, int& k)
+            : Command("classify data", dio),
+            Xexamples(Xexamples), Yexamples(Yexamples), XtoClassify(XtoClassify),Yresults(Yresults),
+            metric(metric), k(k)
 {
-    this->description="classify data";
+    
 }
 
 void Command3::execute(){
-    string train_file;
-    string test_file;
 
-    vector<vector<double>> features;
-    vector<string> labels;
-    
-    Input input=Input();
-    input.readVec(features,labels,train_file);
+    if (Xexamples.size()==0 || Yexamples.size()==0)
+    {
+        this->dio->write("please upload data");
+        return;
+    }
 
-    vector<vector<double>> test_vectors;
-    vector<string> test_labels;
-    input.readTestVec(test_vectors, test_file);
+    for(int i=0; i<=this->XtoClassify.size(); i++){
 
+        Knn knn=Knn(this->metric,this->k);
 
-    for(int i=0; i<=test_vectors.size(); i++){
-        Knn knn=Knn("AUC",5);
+        knn.fit(this->Xexamples,this->Yexamples);
 
-        knn.fit(features,labels);
+        string label=knn.predict(this->XtoClassify[i]);
 
-        string label=knn.predict(test_vectors[i]);
-
-        test_labels.push_back(label);
+        Yresults.push_back(label);
     }
     
 }
