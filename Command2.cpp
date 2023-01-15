@@ -16,9 +16,9 @@ metric(metric), k(k)
 
 void Command2::execute()
 {
-    this->dio->write("The current KNN parameters are: k= "+ to_string(this->k) + ", distance metric = "+ this->metric);
+    dio->write("The current KNN parameters are: k= "+ to_string(this->k) + ", distance metric = "+ this->metric);
     //user should enter k, space and then distance metric name.
-    string parameters = this->dio->read();
+    string parameters = dio->read();
     if (parameters==""){
         return;
     }
@@ -28,16 +28,18 @@ void Command2::execute()
     string sub_String1;   
     getline(s_stream, sub_String1, ' ');
     double k_value=stod(sub_String1);
-    string metric;
-    getline(s_stream, metric, ' ');
-    if (ceil(k_value)==floor(k_value) && (metric == "AUC" || metric == "MAN" || metric == "CHB" || metric == "CAN" || metric == "MIN"))
+    string metric_value;
+    getline(s_stream, metric_value, ' ');
+    if (ceil(k_value)==floor(k_value) && k_value>0 &&
+    (metric_value == "AUC" || metric_value == "MAN" || metric_value == "CHB" || metric_value == "CAN" || metric_value == "MIN"))
+    
     {
         this->k=k_value;
-        this->metric=metric;
+        this->metric=metric_value;
     }
     else
     {
-        if(!(ceil(k_value)==floor(k_value))){
+        if(ceil(k_value)!=floor(k_value  || k_value<=0)){
             this->dio->write("invalid value for K");
         }
         else{

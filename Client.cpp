@@ -109,7 +109,6 @@ struct in_addr addr;
   {
     cout << "Error: invalid port_number" << std::endl;
     exit(1);
-
   }
 
 
@@ -118,10 +117,12 @@ Client client=Client(ip_address,port_number);
 
 int sock=client.serverConnect();
 
-
 while(true)
 {
-
-
+    string output=client.receive(sock);
+    cout<< output;
+    string input;
+    cin>>input;
+    
 }
 }
