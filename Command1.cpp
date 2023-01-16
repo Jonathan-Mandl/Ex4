@@ -42,7 +42,7 @@ void Command1::readExample(string line, std::vector<std::vector<double>>& Xexamp
     }
 
 
-    void readTest(string line,std::vector<std::vector<double>>& XtoClassify)
+    void Command1::readTest(string line,std::vector<std::vector<double>>& XtoClassify)
     {
         stringstream lineStream(line);
     // create vector for specific features in the line
@@ -84,7 +84,7 @@ void Command1::execute()
     dio->write("Upload complete.");
     
     dio->write("Please upload your local test CSV file.");
-    string valid=dio->read();
+    valid=dio->read();
     if (valid=="***invalid_file")
     {
         dio->write("invalid input");
@@ -98,7 +98,7 @@ void Command1::execute()
             {
                 break;
             }
-            this->readTest(line,this->XtoClassify);
+            this->readTest(line,XtoClassify);
         }   
     }   
     dio->write("Upload complete.");

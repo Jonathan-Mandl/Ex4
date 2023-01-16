@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <thread>
-
+#include <pthread.h>
 #include "Server.h"
 
 #include "DefaultIO.h"
@@ -88,8 +88,6 @@ int main(int argc, char* argv[])
     while (true)
     {
         int client_sock=server.acceptClient(sock);
-
-        //server.clientRequest(client_sock);
 
         thread t(handleClient, client_sock);
         t.detach();

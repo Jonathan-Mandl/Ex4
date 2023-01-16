@@ -1,11 +1,9 @@
+#pragma once
 #include <iostream>
 #include<string>
 using namespace std;
 
 #include "DefaultIO.h"
-
-
-
 
 class Command{
     protected:
@@ -15,6 +13,7 @@ class Command{
     public:
     virtual void execute() = 0;
     Command(string description, DefaultIO* dio);
+    string getDescription();
 };
 
 

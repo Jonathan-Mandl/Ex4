@@ -16,6 +16,7 @@ metric(metric), k(k)
 
 void Command2::execute()
 {
+    dio->write("***algorithm_setting");
     dio->write("The current KNN parameters are: k= "+ to_string(this->k) + ", distance metric = "+ this->metric);
     //user should enter k, space and then distance metric name.
     string parameters = dio->read();
@@ -45,4 +46,5 @@ void Command2::execute()
         }
     }
     }
+    
 }

@@ -18,7 +18,6 @@ SocketIO::SocketIO(int client_sock) : client_sock(client_sock)
 }
 
 string SocketIO::read(){
-
     char buffer[4096];
     int expected_data_len= sizeof(buffer);
     int read_bytes= recv(client_sock, buffer, expected_data_len,0 );

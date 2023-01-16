@@ -1,7 +1,6 @@
 
-
-
 #include "Command.h"
+#include <vector>
 
 class Command3 : public Command{
     int& k;

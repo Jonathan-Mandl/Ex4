@@ -125,6 +125,7 @@ while(true)
     client.serverSend(sock,command);
 
     string output=client.receive(sock);
+    cout<<output<<endl;
     if(output=="***upload_files") {
 
       output=client.receive(sock);
@@ -159,11 +160,11 @@ while(true)
 
       string test_file;
       cin>>test_file;
-      fstream fin;
+      fstream fin2;
       //open csv file with specific path as file_name
-      fin.open(test_file, ios::in);
+      fin2.open(test_file, ios::in);
       // returns error if file cannot be opened
-      if (fin.fail())
+      if (fin2.fail())
       {
         client.serverSend(sock,"***invalid_file");
         continue;
@@ -171,7 +172,7 @@ while(true)
       else{
         string line;
         //reads every line of csv file
-        while (getline(fin, line)) {
+        while (getline(fin2, line)) {
           client.serverSend(sock,line);
         }
 
@@ -196,13 +197,13 @@ while(true)
       output=client.receive(sock);
       cout<<output<<endl;
     }
-
     else{
       output=client.receive(sock);
       cout<<output<<endl;
       string input;
       getline(cin,input);
       client.serverSend(sock,input);
+
     }
 
 }
