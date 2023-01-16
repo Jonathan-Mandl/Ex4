@@ -8,6 +8,8 @@
 #include <vector>
 #include <sstream>
 #include <stdexcept>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 #include "Client.h"
@@ -80,7 +82,6 @@ return output;
 }
 
 
-
 /*
 The main function get as inputs: int argc, char* argv[], while int argc is the number of parameters in argv[],
 and char* argv[] is the array with the parameters of ip_address and port_number. 
@@ -112,7 +113,6 @@ struct in_addr addr;
   }
 
 
-
 Client client=Client(ip_address,port_number);
 
 int sock=client.serverConnect();
@@ -120,9 +120,64 @@ int sock=client.serverConnect();
 while(true)
 {
     string output=client.receive(sock);
-    cout<< output;
-    string input;
-    cin>>input;
-    
+
+    if(output=="***upload_files")
+    {
+      output=client.receive(sock);
+      cout<<output<<endl;
+      string train_file;
+      cin>>train_file;
+      fstream fin;
+      //open csv file with specific path as file_name
+      fin.open(train_file, ios::in);
+      // returns error if file cannot be opened
+      if (fin.fail())
+      {
+        client.serverSend(sock,"***invalid_file");
+        continue;
+      }
+      else{
+        client.serverSend(sock,"***valid_file");
+        string line;
+        //reads every line of csv file
+        while (getline(fin, line)) {
+          client.serverSend(sock,line);
+        }
+
+        client.serverSend(sock,"***done");
+
+        output=client.receive(sock);
+        cout<<output<<endl;
+      }
+
+      output=client.receive(sock);
+      cout<<output;
+
+      string test_file;
+      cin>>test_file;
+      fstream fin;
+      //open csv file with specific path as file_name
+      fin.open(test_file, ios::in);
+      // returns error if file cannot be opened
+      if (fin.fail())
+      {
+        client.serverSend(sock,"***invalid_file");
+        continue;
+      }
+      else{
+        string line;
+        //reads every line of csv file
+        while (getline(fin, line)) {
+          client.serverSend(sock,line);
+        }
+
+        client.serverSend(sock,"***done");
+
+        output=client.receive(sock);
+        cout<<output; 
+      }       
+      
+    }
+
 }
 }
