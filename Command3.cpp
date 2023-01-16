@@ -20,9 +20,11 @@ Command3::Command3(DefaultIO* dio,
 
 void Command3::execute(){
 
-    if (Xexamples.size()==0 || Yexamples.size()==0)
+    dio->write("***classify_data");
+
+    if (this->Xexamples.size()==0 || this->Yexamples.size()==0)
     {
-        this->dio->write("please upload data");
+        dio->write("please upload data");
         return;
     }
 

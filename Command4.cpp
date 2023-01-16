@@ -10,15 +10,17 @@ Command4::Command4(DefaultIO* dio,std::vector<std::string>& Yresults)
 
 void Command4::execute()
 {
+    
+    dio->write("***display_results");
     string output;
 
     for(int i=0;i<Yresults.size(); i++)
     {
-        output += to_string(i) + "\t" + Yresults[i]+ "\n";
+        output = to_string(i) + "\t" + Yresults[i];
+        dio->write(output);
     }
     
-    output += "Done.\n";
-
-    dio->write(output);
+    dio->write("Done.\n");
+    dio->write("***done");
 
 }

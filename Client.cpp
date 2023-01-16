@@ -74,11 +74,10 @@ after the function connect to the server and recive the lable we print it.
 
 string Client::receive(int sock)
 {
-string output;
 char buffer[4096];
 int expected_data_len= sizeof(buffer);
 int read_bytes = recv(sock, buffer, expected_data_len, 0);
-return output;
+return buffer;
 }
 
 
@@ -119,10 +118,15 @@ int sock=client.serverConnect();
 
 while(true)
 {
-    string output=client.receive(sock);
+    string menu=client.receive(sock);
+    cout<<menu<<endl;
+    string command;
+    cin>>command;
+    client.serverSend(sock,command);
 
-    if(output=="***upload_files")
-    {
+    string output=client.receive(sock);
+    if(output=="***upload_files") {
+
       output=client.receive(sock);
       cout<<output<<endl;
       string train_file;
@@ -151,7 +155,7 @@ while(true)
       }
 
       output=client.receive(sock);
-      cout<<output;
+      cout<<output<<endl;
 
       string test_file;
       cin>>test_file;
@@ -177,6 +181,28 @@ while(true)
         cout<<output; 
       }       
       
+    }
+    else if(output=="***display_results"){
+      while(true){
+      output=client.receive(sock);
+      if (output=="***done"){
+        break;
+      }
+      cout<<output<<endl;
+      }
+    }
+    else if(output=="***classify_data")
+    {
+      output=client.receive(sock);
+      cout<<output<<endl;
+    }
+
+    else{
+      output=client.receive(sock);
+      cout<<output<<endl;
+      string input;
+      getline(cin,input);
+      client.serverSend(sock,input);
     }
 
 }

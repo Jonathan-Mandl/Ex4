@@ -21,8 +21,7 @@ void Command2::execute()
     string parameters = dio->read();
     if (parameters==""){
         return;
-    }
-    
+    }   
     else{
     stringstream s_stream(parameters);
     string sub_String1;   
@@ -31,15 +30,14 @@ void Command2::execute()
     string metric_value;
     getline(s_stream, metric_value, ' ');
     if (ceil(k_value)==floor(k_value) && k_value>0 &&
-    (metric_value == "AUC" || metric_value == "MAN" || metric_value == "CHB" || metric_value == "CAN" || metric_value == "MIN"))
-    
+    (metric_value == "AUC" || metric_value == "MAN" || metric_value == "CHB" || metric_value == "CAN" || metric_value == "MIN"))  
     {
         this->k=k_value;
         this->metric=metric_value;
     }
     else
     {
-        if(ceil(k_value)!=floor(k_value  || k_value<=0)){
+        if(ceil(k_value)!=floor(k_value ) || k_value<=0){
             this->dio->write("invalid value for K");
         }
         else{

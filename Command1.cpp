@@ -102,6 +102,5 @@ void Command1::execute()
         }   
     }   
     dio->write("Upload complete.");
-
 }
 
