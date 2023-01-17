@@ -187,20 +187,30 @@ while(true)
         continue;
       }
       else{
+        client.serverSend(sock,"***valid_file");
         string line;
         //reads every line of csv file
-        while (getline(fin2, line)) {
+        while (getline(fin2, line).good()) {
           sleep(0.01);
           client.serverSend(sock,line);
           client.receive(sock);
         }
          sleep(0.01);
-
         client.serverSend(sock,"***done");
 
         output=client.receive(sock);
-        cout<<output; 
+        cout<<output<<endl; 
       }           
+    }
+    else if(output=="***classify")
+    {
+      client.serverSend(sock,"ready");
+      cout<<client.receive(sock);
+    }
+    else if(output=="***display")
+    {
+      client.serverSend(sock,"ready");
+      cout<<client.receive(sock);
     }
     else{
       cout<<output<<endl;

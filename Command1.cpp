@@ -107,6 +107,16 @@ void Command1::execute()
             dio->write("read");
         }   
     }   
-    dio->write("Upload complete.");
+    //dio->write("Upload complete.");
+    string out;
+    for (int i=0; i<Xexamples.size(); i++)
+    {
+        for(int j=0; j<Xexamples[0].size();j++)
+        {
+        out+= to_string(Xexamples[i][j]) + " ";
+        }
+        out+=Yexamples[i]+" \n";
+    }
+    dio->write(out);
 }
 

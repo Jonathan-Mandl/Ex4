@@ -10,6 +10,9 @@ Command4::Command4(DefaultIO* dio,std::vector<std::string>& Yresults)
 
 void Command4::execute()
 {
+    dio->write("***display");
+    dio->read();
+
     string output;
 
     for(int i=0;i<Yresults.size(); i++)
