@@ -32,8 +32,11 @@ string SocketIO::read(){
     {
         perror("error receiving information");
         exit(1);
-    }  
+    } 
+    else{ 
+    buffer[read_bytes]='\0';
     return buffer;
+    }
 }
 
 void SocketIO::write(string output)
