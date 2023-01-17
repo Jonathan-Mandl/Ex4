@@ -2,8 +2,9 @@
 #include "Command1.h"
 #include <vector>
 #include <sstream>
-
+#include <unistd.h>
 #include <fstream>
+#include <iostream>
 
 Command1::Command1(DefaultIO* dio, 
             std::vector<std::vector<double>>& Xexamples,
@@ -62,9 +63,13 @@ void Command1::readExample(string line, std::vector<std::vector<double>>& Xexamp
 
 void Command1::execute()
 {
-    dio->write("***upload_files");
+    dio->write("***upload_file");
+    sleep(1);
+    dio->read();
+
     dio->write("Please upload your local train CSV file.");
     string valid=dio->read();
+    sleep(1);
     if (valid=="***invalid_file")
     {
         dio->write("invalid input");

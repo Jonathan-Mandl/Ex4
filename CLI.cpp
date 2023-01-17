@@ -5,9 +5,12 @@
 #include "Command3.h"
 #include "Command4.h"
 #include "Command5.h"
+#include <unistd.h>
 
 CLI::CLI(DefaultIO* dio) : dio(dio) 
 {
+    this->k=5;
+    this->metric="AUC";
     commands[0] = new Command1(dio, Xexamples, Yexamples, XtoClassify);
     commands[1]= new Command2(dio,k,metric);
     commands[2]= new Command3(dio, Xexamples,Yexamples,XtoClassify,Yresults,metric,k);
@@ -33,13 +36,12 @@ void CLI::start()
             {
                 menu += to_string(i) +". " + commands[i]->getDescription() + "\n";
             }
-            dio->write(menu);   
+            dio->write(menu);     
              // todo show menu
             string input = dio->read();
-
-            dio->write(input);
             // todo make sure it's valid number in range...
             commands[stoi(input)]->execute();
+            sleep(1);
         }
     }
     catch (exception&) {

@@ -10,6 +10,7 @@
 #include <stdexcept>
 #include <fstream>
 #include <sstream>
+#include <cstdio>
 using namespace std;
 
 #include "Client.h"
@@ -75,6 +76,7 @@ after the function connect to the server and recive the lable we print it.
 string Client::receive(int sock)
 {
 char buffer[4096];
+memset(buffer, 0, sizeof(buffer));
 int expected_data_len= sizeof(buffer);
 int read_bytes = recv(sock, buffer, expected_data_len, 0);
 return buffer;
@@ -125,11 +127,10 @@ while(true)
     client.serverSend(sock,command);
 
     string output=client.receive(sock);
-    cout<<output<<endl;
-    if(output=="***upload_files") {
 
-      output=client.receive(sock);
+    if(output=="***upload_file") {
       cout<<output<<endl;
+      client.serverSend(sock,"ready");
       string train_file;
       cin>>train_file;
       fstream fin;
@@ -180,30 +181,16 @@ while(true)
 
         output=client.receive(sock);
         cout<<output; 
-      }       
-      
-    }
-    else if(output=="***display_results"){
-      while(true){
-      output=client.receive(sock);
-      if (output=="***done"){
-        break;
-      }
-      cout<<output<<endl;
-      }
-    }
-    else if(output=="***classify_data")
-    {
-      output=client.receive(sock);
-      cout<<output<<endl;
+      }           
     }
     else{
-      output=client.receive(sock);
       cout<<output<<endl;
       string input;
+      cin.ignore();
       getline(cin,input);
       client.serverSend(sock,input);
-
+      output=client.receive(sock);
+      cout<<output<<endl;
     }
 
 }

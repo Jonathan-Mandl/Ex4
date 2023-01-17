@@ -3,6 +3,8 @@
 #include <sstream>
 #include <string.h>
 #include <cmath>
+#include <iostream>
+#include <unistd.h>
 
 
 using namespace std;
@@ -16,10 +18,12 @@ metric(metric), k(k)
 
 void Command2::execute()
 {
-    dio->write("***algorithm_setting");
     dio->write("The current KNN parameters are: k= "+ to_string(this->k) + ", distance metric = "+ this->metric);
     //user should enter k, space and then distance metric name.
     string parameters = dio->read();
+    
+    sleep(1);
+
     if (parameters==""){
         return;
     }   
@@ -35,16 +39,17 @@ void Command2::execute()
     {
         this->k=k_value;
         this->metric=metric_value;
+        dio->write("valid");
     }
     else
     {
         if(ceil(k_value)!=floor(k_value ) || k_value<=0){
-            this->dio->write("invalid value for K");
+            dio->write("invalid value for K");
         }
         else{
-            this->dio->write("invalid value for metric");
+            dio->write("invalid value for metric");
         }
     }
     }
-    
+   
 }
