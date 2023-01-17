@@ -65,8 +65,6 @@ void Command1::execute()
 {
     dio->write("***upload_file");
     sleep(1);
-    dio->read();
-
     dio->write("Please upload your local train CSV file.");
     string valid=dio->read();
     sleep(1);
@@ -78,16 +76,17 @@ void Command1::execute()
     else{
         while(true)
         {
+            sleep(0.01);
             string line=dio->read();
-            if (line=="***Done")
+            if (line=="***done")
             {
                 break;
             }
             this->readExample(line,this->Xexamples,this->Yexamples);
+            dio->write("read");
         }   
     }
     dio->write("Upload complete.");
-    
     dio->write("Please upload your local test CSV file.");
     valid=dio->read();
     if (valid=="***invalid_file")
@@ -98,12 +97,14 @@ void Command1::execute()
     else{
         while(true)
         {
+            sleep(0.01);
             string line=dio->read();
-            if (line=="***Done")
+            if (line=="***done")
             {
                 break;
             }
             this->readTest(line,XtoClassify);
+            dio->write("read");
         }   
     }   
     dio->write("Upload complete.");

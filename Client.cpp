@@ -79,7 +79,21 @@ char buffer[4096];
 memset(buffer, 0, sizeof(buffer));
 int expected_data_len= sizeof(buffer);
 int read_bytes = recv(sock, buffer, expected_data_len, 0);
-return buffer;
+    if (read_bytes ==0)
+    {
+        //connection is closed.
+        close(sock);
+        throw std::exception();
+    }
+    else if (read_bytes<0)
+    {
+        perror("error receiving information");
+        exit(1);
+    } 
+    else{
+    buffer[read_bytes]='\0';
+    return buffer;
+    }
 }
 
 
@@ -129,8 +143,8 @@ while(true)
     string output=client.receive(sock);
 
     if(output=="***upload_file") {
+      output=client.receive(sock);
       cout<<output<<endl;
-      client.serverSend(sock,"ready");
       string train_file;
       cin>>train_file;
       fstream fin;
@@ -146,10 +160,12 @@ while(true)
         client.serverSend(sock,"***valid_file");
         string line;
         //reads every line of csv file
-        while (getline(fin, line)) {
+        while (getline(fin, line).good()) {
+          sleep(0.01);
           client.serverSend(sock,line);
+          client.receive(sock);
         }
-
+        sleep(0.01);
         client.serverSend(sock,"***done");
 
         output=client.receive(sock);
@@ -174,8 +190,11 @@ while(true)
         string line;
         //reads every line of csv file
         while (getline(fin2, line)) {
+          sleep(0.01);
           client.serverSend(sock,line);
+          client.receive(sock);
         }
+         sleep(0.01);
 
         client.serverSend(sock,"***done");
 
