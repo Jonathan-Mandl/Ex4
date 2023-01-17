@@ -20,7 +20,7 @@ The Client class initialized by char* ip_address, int port_number.
 the cleint use the port number and ip address to connect the server and send him the buffer.
 */
 
-Client::Client(char* ip_address, int port_number)
+Client::Client(const char* ip_address,const  int port_number)
 {
     this->ip_address=ip_address;
     this->port_number=port_number;
@@ -107,19 +107,20 @@ with the port number and ip address the client connect to the server and send to
 */
 
 
-int main(int argc, char* argv[])
+int main()
 {
-char* ip_address= argv[1];
-int port_number=stoi(argv[2]);
-
-struct in_addr addr;
-  // Convert the IP address
+//int argc, char* argv[]
+const char* ip_address="127.0.0.1";
+const int port_number=5555;
+/*
+  struct in_addr addr;
   int result = inet_pton(AF_INET, ip_address, &addr);
   // check if ip adress can be converted. if not, return error
   if (!result) {
     cout << "Error: invalid IP address" << std::endl;
     exit(1);
   }
+*/
 
   if (!(port_number>=1024 && port_number<=65535))
   {
@@ -160,10 +161,11 @@ while(true)
         client.serverSend(sock,"***valid_file");
         string line;
         //reads every line of csv file
-        while (getline(fin, line).good()) {
+        while (getline(fin, line)) {
           sleep(0.01);
           client.serverSend(sock,line);
           client.receive(sock);
+          line.clear();
         }
         sleep(0.01);
         client.serverSend(sock,"***done");
@@ -190,10 +192,11 @@ while(true)
         client.serverSend(sock,"***valid_file");
         string line;
         //reads every line of csv file
-        while (getline(fin2, line).good()) {
+        while (getline(fin2, line)) {
           sleep(0.01);
           client.serverSend(sock,line);
           client.receive(sock);
+          line.clear();
         }
          sleep(0.01);
         client.serverSend(sock,"***done");
@@ -205,12 +208,12 @@ while(true)
     else if(output=="***classify")
     {
       client.serverSend(sock,"ready");
-      cout<<client.receive(sock);
+      cout<<client.receive(sock)<<endl;
     }
     else if(output=="***display")
     {
       client.serverSend(sock,"ready");
-      cout<<client.receive(sock);
+      cout<<client.receive(sock)<<endl;
     }
     else{
       cout<<output<<endl;

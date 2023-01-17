@@ -17,7 +17,7 @@ void Command4::execute()
 
     for(int i=0;i<Yresults.size(); i++)
     {
-        output += to_string(i) + "\t" + Yresults[i];
+        output += to_string(i) + "\t" + Yresults[i] + "\n";
     }
     
     output+=("Done.\n");

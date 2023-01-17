@@ -29,11 +29,11 @@ void Command3::execute(){
         return;
     }
 
-    for(int i=0; i<=this->XtoClassify.size(); i++){
+    Knn knn(this->metric,this->k);
 
-        Knn knn=Knn(this->metric,this->k);
+    knn.fit(this->Xexamples,this->Yexamples);
 
-        knn.fit(this->Xexamples,this->Yexamples);
+    for(int i=0; i<this->XtoClassify.size(); i++){
 
         string label=knn.predict(this->XtoClassify[i]);
 

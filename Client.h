@@ -4,12 +4,12 @@
 using namespace std;
 
 class Client{
-char* ip_address;
+const char* ip_address;
 int port_number;
 
 public:
 
-Client(char* ip_address, int port_number);
+Client(const char* ip_address,const int port_number);
 
 int serverConnect();
 
