@@ -16,7 +16,7 @@ Command1::Command1(DefaultIO* dio,
   
 }
 
-void Command1::readExample(string line, std::vector<std::vector<double>>& Xexamples,
+bool Command1::readExample(string line, std::vector<std::vector<double>>& Xexamples,
     std::vector<std::string>& Yexamples)
     {
         stringstream lineStream(line);
@@ -24,7 +24,7 @@ void Command1::readExample(string line, std::vector<std::vector<double>>& Xexamp
         std::vector<double> vector;
         //create string for labels
         string label;
-
+        bool isOk = true;
         string value;
         //reads every character until next space
         while (getline(lineStream, value, ',')) {
@@ -34,12 +34,21 @@ void Command1::readExample(string line, std::vector<std::vector<double>>& Xexamp
                 Yexamples.push_back(label);
             }
             else {
+                try {
+                    stod(value);
+                }
+                catch (std::exception&) {
+                    isOk = false;
+                    continue;
+                }
                 // These are the vector values
                 vector.push_back(stod(value));
             }
         }
         //adds the vector we just created into vector of vectors that contains features
         Xexamples.push_back(vector);
+
+        return isOk;
     }
 
 
@@ -73,22 +82,42 @@ void Command1::execute()
         dio->write("invalid input");
         return;
     }
-    else{
-        while(true)
+    bool allLinesAreGood = true;
+    while(true)
+    {
+        sleep(0.01);
+        string line=dio->read();
+        if (line=="***done")
         {
-            sleep(0.01);
-            string line=dio->read();
-            if (line=="***done")
-            {
+            break;
+        }
+        bool lineIsGood = this->readExample(line,this->Xexamples,this->Yexamples);
+        if (!lineIsGood) {
+            allLinesAreGood = false;
+        }
+        dio->write("read");
+    }
+
+    if (Xexamples.size() == 0) allLinesAreGood = false;
+    if (allLinesAreGood){
+        for (const std::vector<double>& vec : Xexamples) {
+            if (vec.size() != Xexamples[0].size()) {
+                allLinesAreGood = false;
                 break;
             }
-            this->readExample(line,this->Xexamples,this->Yexamples);
-            dio->write("read");
-        }   
+        }
     }
-    dio->write("Upload complete.");
-    dio->write("Please upload your local test CSV file.");
+
+    if (!allLinesAreGood) {
+        dio->write("***invalid file");
+        return;
+    }
+
+    dio->write("Upload complete.\n" 
+               "Please upload your local test CSV file."
+    );
     valid=dio->read();
+
     if (valid=="***invalid_file")
     {
         Xexamples.clear();

@@ -149,6 +149,7 @@ while(true)
       cout<<output<<endl;
       string train_file;
       cin>>train_file;
+      // getline(cink, trainfile)
       fstream fin;
       //open csv file with specific path as file_name
       fin.open(train_file, ios::in);
@@ -159,7 +160,7 @@ while(true)
         cout<<client.receive(sock)<<endl;
         continue;
       }
-      else{
+    
         client.serverSend(sock,"***valid_file");
         string line;
         //reads every line of csv file
@@ -173,11 +174,12 @@ while(true)
         client.serverSend(sock,"***done");
 
         output=client.receive(sock);
-        cout<<output<<endl;
-      }
-
-      output=client.receive(sock);
-      cout<<output<<endl;
+        if (output == "***invalid file") {
+          cout << "invalid file";
+          continue;
+        }
+        cout<<output<<endl; // please upload next file msg
+      
 
       string test_file;
       cin>>test_file;
@@ -191,9 +193,9 @@ while(true)
         cout<<client.receive(sock)<<endl;
         continue;
       }
-      else{
+      
         client.serverSend(sock,"***valid_file");
-        string line;
+        line.clear();
         //reads every line of csv file
         while (getline(fin2, line)) {
           sleep(0.01);
@@ -206,7 +208,7 @@ while(true)
 
         output=client.receive(sock);
         cout<<output<<endl; 
-      }           
+              
     }
     else if(output=="***classify")
     {
