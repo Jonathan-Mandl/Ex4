@@ -33,6 +33,11 @@ void Command3::execute(){
 
     knn.fit(this->Xexamples,this->Yexamples);
 
+    if(Yresults.size()>0)
+    {
+        Yresults.clear();
+    }
+
     for(int i=0; i<this->XtoClassify.size(); i++){
 
         string label=knn.predict(this->XtoClassify[i]);
