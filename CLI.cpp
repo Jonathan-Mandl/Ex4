@@ -34,14 +34,20 @@ void CLI::start()
             string menu="welcome to the KNN Classifier Server. Please choose an option:\n";
             for(int i=0; i<4; i++)
             {
-                menu += to_string(i) +". " + commands[i]->getDescription() + "\n";
+                menu += to_string(i+1) +". " + commands[i]->getDescription() + "\n";
             }
             dio->write(menu);     
              // todo show menu
             string input = dio->read();
+
+            if(stoi(input)==8)
+            {
+                break;
+            }
             // todo make sure it's valid number in range...
-            commands[stoi(input)]->execute();
-            sleep(1);
+            commands[stoi(input)-1]->execute();
+            sleep(0.5);
+            
         }
     }
     catch (exception&) {

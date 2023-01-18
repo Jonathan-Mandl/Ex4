@@ -67,7 +67,7 @@ void Command1::execute()
     sleep(1);
     dio->write("Please upload your local train CSV file.");
     string valid=dio->read();
-    sleep(1);
+    sleep(0.05);
     if (valid=="***invalid_file")
     {
         dio->write("invalid input");
@@ -91,8 +91,10 @@ void Command1::execute()
     valid=dio->read();
     if (valid=="***invalid_file")
     {
+        Xexamples.clear();
+        Yexamples.clear();
+        sleep(0.01);
         dio->write("invalid input");
-        return;
     }
     else{
         while(true)
@@ -105,20 +107,9 @@ void Command1::execute()
             }
             this->readTest(line,XtoClassify);
             dio->write("read");
-        }   
+        } 
+        dio->write("Upload complete.");  
     }   
-    dio->write("Upload complete.");
-    /*
-    string out;
-    for (int i=0; i<Xexamples.size(); i++)
-    {
-        for(int j=0; j<Xexamples[0].size();j++)
-        {
-        out+= to_string(Xexamples[i][j]) + " ";
-        }
-        out+=Yexamples[i]+" \n";
-    }
-    dio->write(out);
-    */
+    
 }
 

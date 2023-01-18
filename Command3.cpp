@@ -23,7 +23,7 @@ void Command3::execute(){
     dio->write("***classify");
     dio->read();
 
-    if (this->Xexamples.size()==0 || this->Yexamples.size()==0)
+    if (this->Xexamples.size()==0 || this->Yexamples.size()==0 || XtoClassify.size()==0)
     {
         dio->write("please upload data");
         return;

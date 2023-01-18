@@ -136,6 +136,7 @@ int sock=client.serverConnect();
 while(true)
 {
     string menu=client.receive(sock);
+    cout<<endl;
     cout<<menu<<endl;
     string command;
     cin>>command;
@@ -213,7 +214,17 @@ while(true)
     else if(output=="***display")
     {
       client.serverSend(sock,"ready");
-      cout<<client.receive(sock)<<endl;
+      while(true)
+      {
+      sleep(0.01);
+      output=client.receive(sock);
+      cout<<output<<endl;
+      if (output=="Done.")
+      {
+        break;
+      }
+      client.serverSend(sock,"ready");
+      }
     }
     else{
       cout<<output<<endl;
