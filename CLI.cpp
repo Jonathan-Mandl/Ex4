@@ -31,7 +31,7 @@ void CLI::start()
 
     try {
         while (1) {
-            string menu="welcome to the KNN Classifier Server. Please choose an option:\n";
+            string menu="Welcome to the KNN Classifier Server. Please choose an option:\n";
             for(int i=0; i<4; i++)
             {
                 menu += to_string(i+1) +". " + commands[i]->getDescription() + "\n";

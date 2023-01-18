@@ -156,6 +156,7 @@ while(true)
       if (fin.fail())
       {
         client.serverSend(sock,"***invalid_file");
+        cout<<client.receive(sock)<<endl;
         continue;
       }
       else{
@@ -187,6 +188,7 @@ while(true)
       if (fin2.fail())
       {
         client.serverSend(sock,"***invalid_file");
+        cout<<client.receive(sock)<<endl;
         continue;
       }
       else{

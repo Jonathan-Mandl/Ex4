@@ -19,7 +19,7 @@ void Command4::execute()
     for(int i=0;i<Yresults.size(); i++)
     {
         sleep(0.01);
-        dio->write(to_string(i) + "\t" + Yresults[i]);
+        dio->write(to_string(i+1) + "\t" + Yresults[i]);
         dio->read();
     }
     

@@ -95,6 +95,7 @@ void Command1::execute()
         Yexamples.clear();
         sleep(0.01);
         dio->write("invalid input");
+        return;
     }
     else{
         while(true)
