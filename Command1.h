@@ -16,7 +16,7 @@ class Command1 : public Command{
     public:
     bool readExample(string line,std::vector<std::vector<double>>& Xexamples,
     std::vector<std::string>& Yexamples);
-    void readTest(string line,std::vector<std::vector<double>>& XtoClassify);
+    bool readTest(string line,std::vector<std::vector<double>>& XtoClassify);
     Command1(DefaultIO* dio, 
             std::vector<std::vector<double>>& Xexamples,
             std::vector<std::string>& Yexamples,

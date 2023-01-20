@@ -177,7 +177,7 @@ int main()
       output = client.receive(sock);
       if (output == "***invalid file")
       {
-        cout << "invalid file";
+        cout << "invalid input";
         continue;
       }
       cout << output << endl; // please upload next file msg
@@ -209,6 +209,11 @@ int main()
       client.serverSend(sock, "***done");
 
       output = client.receive(sock);
+      if (output == "***invalid file")
+      {
+        cout << "invalid input";
+        continue;
+      }
       cout << output << endl;
     }
     else if (output == "***classify")
@@ -241,7 +246,7 @@ int main()
           sleep(0.01);
           output = client.receive(sock);
           cout << output << endl;
-          if (output == "Done.")
+          if (output == "Done.\n")
           {
             break;
           }

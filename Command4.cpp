@@ -39,6 +39,6 @@ void Command4::execute()
             dio->read();
         }
 
-        dio->write("Done.");
+        dio->write("Done.\n");
     }
 }
