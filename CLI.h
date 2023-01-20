@@ -1,6 +1,11 @@
 #include <vector>
 #include <string>
 #include "Command.h"
+#include "Command1.h"
+#include "Command2.h"
+#include "Command3.h"
+#include "Command4.h"
+#include "Command5.h"
 
 class CLI{
     std::vector<std::vector<double>> Xexamples;

@@ -1,10 +1,5 @@
 
 #include "CLI.h"
-#include "Command1.h"
-#include "Command2.h"
-#include "Command3.h"
-#include "Command4.h"
-#include "Command5.h"
 #include <unistd.h>
 
 CLI::CLI(DefaultIO* dio) : dio(dio) 
@@ -14,12 +9,13 @@ CLI::CLI(DefaultIO* dio) : dio(dio)
     commands[0] = new Command1(dio, Xexamples, Yexamples, XtoClassify);
     commands[1]= new Command2(dio,k,metric);
     commands[2]= new Command3(dio, Xexamples,Yexamples,XtoClassify,Yresults,metric,k);
-    commands[3]= new Command4(dio,Yresults);
+    commands[3]= new Command4(dio,Xexamples,Yexamples,XtoClassify,Yresults);
+    commands[4]= new Command5(dio,Xexamples,Yexamples,XtoClassify,Yresults);
 }
 
 CLI::~CLI() 
 {
-    for (size_t i = 0; i < 4; i++)
+    for (size_t i = 0; i < 5; i++)
     {
         delete commands[i];
     }
@@ -32,7 +28,7 @@ void CLI::start()
     try {
         while (1) {
             string menu="Welcome to the KNN Classifier Server. Please choose an option:\n";
-            for(int i=0; i<4; i++)
+            for(int i=0; i<5; i++)
             {
                 menu += to_string(i+1) +". " + commands[i]->getDescription() + "\n";
             }
@@ -46,7 +42,7 @@ void CLI::start()
             }
             // todo make sure it's valid number in range...
             commands[stoi(input)-1]->execute();
-            sleep(0.5);
+            sleep(0.1);
             
         }
     }
