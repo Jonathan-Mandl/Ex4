@@ -38,6 +38,8 @@ void Command2::execute()
         }
         catch (std::invalid_argument& e)
         {
+            dio->write("***invalid");
+            dio->read();
             dio->write("invalid value for K");
             return;
         }
