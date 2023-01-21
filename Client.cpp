@@ -339,6 +339,11 @@ int main(int argc, char *argv[])
         string input;
         cin.ignore();
         getline(cin, input);
+        if(input=="")
+        {
+          client.serverSend(sock, "***end");
+          continue;
+        }
         client.serverSend(sock, input);
         string valid = client.receive(sock);
         if (valid == "***invalid")

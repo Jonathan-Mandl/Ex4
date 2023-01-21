@@ -24,7 +24,7 @@ CLI::~CLI()
 
 void CLI::start()
 {
-
+        try{
         while (1) {
             string menu="Welcome to the KNN Classifier Server. Please choose an option:\n";
             for(int i=0; i<5; i++)
@@ -43,4 +43,10 @@ void CLI::start()
             commands[stoi(input)-1]->execute();
             sleep(0.1);
         }
+        }
+        catch(exception&)
+        {
+            
+        }
+
 }

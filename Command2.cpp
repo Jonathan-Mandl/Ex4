@@ -22,7 +22,7 @@ void Command2::execute()
 
     sleep(0.1);
 
-    if (parameters == "")
+    if (parameters == "***end")
     {
         return;
     }
