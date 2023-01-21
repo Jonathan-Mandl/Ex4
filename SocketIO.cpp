@@ -24,9 +24,9 @@ string SocketIO::read(){
     int read_bytes= recv(client_sock, buffer, expected_data_len,0 );
     if (read_bytes ==0)
     {
-        //connection is closed.
+        perror("connection is closed");
         close(client_sock);
-        throw std::exception();
+        exit(1);
     }
     else if (read_bytes<0)
     {

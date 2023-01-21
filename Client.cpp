@@ -12,11 +12,13 @@
 #include <sstream>
 #include <cstdio>
 #include <sys/stat.h>
+#include <thread>
+#include <pthread.h>
 using namespace std;
 
 #include "Client.h"
 
-void Command5(int sock, const char *ip_address, const int port_number)
+void command5(int sock, const char *ip_address, const int port_number)
 {
   Client client(ip_address, port_number);
 
@@ -36,7 +38,7 @@ void Command5(int sock, const char *ip_address, const int port_number)
   }
   else
   {
-    cout << client.receive(sock);
+    cout << message<<endl;
     string path;
     cin.ignore();
     getline(cin, path);
@@ -45,7 +47,7 @@ void Command5(int sock, const char *ip_address, const int port_number)
     if (stat(path.c_str(), &info) != 0)
     {
       client.serverSend(sock, "***invalid_path");
-      cout << client.receive(sock);
+      cout << client.receive(sock)<<endl;
       return;
     }
     // path exists and is a directory
@@ -57,13 +59,14 @@ void Command5(int sock, const char *ip_address, const int port_number)
     else
     {
       client.serverSend(sock, "***invalid_path");
-      cout << client.receive(sock);
+      cout << client.receive(sock)<<endl;
       return;
     }
 
-    client.serverSend(sock, "ready");
+    client.receive(sock);
+    client.serverSend(sock,"ready");
 
-    path=path+"prediction.txt";
+    path=path+"/prediction.txt";
 
     std::ofstream file;
 
@@ -148,7 +151,7 @@ string Client::receive(int sock)
   char buffer[4096];
   memset(buffer, 0, sizeof(buffer));
   int expected_data_len = sizeof(buffer);
-  int read_bytes = recv(sock, buffer, expected_data_len, MSG_PEEK);
+  int read_bytes = recv(sock, buffer, expected_data_len, 0);
   if (read_bytes == 0)
   {
     // connection is closed.
@@ -166,12 +169,6 @@ string Client::receive(int sock)
     buffer[read_bytes] = '\0';
     return buffer;
   }
-}
-
-string Client::new_Thread_Recieve(int sock)
-{
-  
-
 }
 
 
@@ -333,16 +330,25 @@ int main()
     }
     else if (output == "***download")
     {
+  
+      thread t(command5,sock,ip_address,port_number);
+      t.join();
+    
     }
     else
     {
+      //user enters k and metric...
       cout << output << endl;
       string input;
       cin.ignore();
       getline(cin, input);
       client.serverSend(sock, input);
-      output = client.receive(sock);
-      cout << output << endl;
+      string valid = client.receive(sock);
+      if (valid=="***invalid")
+      {
+      client.serverSend(sock,"ready");
+      cout << client.receive(sock) << endl;
+      }
     }
   }
 }

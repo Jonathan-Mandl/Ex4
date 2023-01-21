@@ -27,7 +27,6 @@ void Command5::execute()
     }
     else
     {
-
         dio->write("Please enter file path:");
         string valid=dio->read();
         if(valid=="***invalid_path")
@@ -36,6 +35,8 @@ void Command5::execute()
             return;
         }
 
+        dio->write("downloading");
+        dio->read();
 
         for (int i = 0; i < Yresults.size(); i++)
         {

@@ -15,8 +15,6 @@ int serverConnect();
 
 string receive(int sock);
 
-string new_Thread_Recieve(int sock);
-
 void serverSend(int sock, string input);
 
 

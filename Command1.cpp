@@ -91,7 +91,7 @@ void Command1::execute()
     XtoClassify.clear();
     
     dio->write("***upload_file");
-    sleep(1);
+    sleep(0.01);
     dio->write("Please upload your local train CSV file.");
     string valid = dio->read();
     sleep(0.05);
