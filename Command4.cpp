@@ -30,8 +30,6 @@ void Command4::execute()
         dio->write("send");
         dio->read();
 
-        string output;
-
         for (int i = 0; i < Yresults.size(); i++)
         {
             sleep(0.01);

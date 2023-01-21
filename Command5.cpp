@@ -28,10 +28,14 @@ void Command5::execute()
     else
     {
 
-        dio->write("send");
-        dio->read();
+        dio->write("Please enter file path:");
+        string valid=dio->read();
+        if(valid=="***invalid_path")
+        {
+            dio->write("Invalid file path");
+            return;
+        }
 
-        string output;
 
         for (int i = 0; i < Yresults.size(); i++)
         {
@@ -40,7 +44,9 @@ void Command5::execute()
             dio->read();
         }
 
-        dio->write("Done.");
+        dio->write("***done");
+
+    
     }
 
 }

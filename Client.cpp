@@ -11,10 +11,79 @@
 #include <fstream>
 #include <sstream>
 #include <cstdio>
+#include <sys/stat.h>
 using namespace std;
 
 #include "Client.h"
 
+void Command5(int sock, const char *ip_address, const int port_number)
+{
+  Client client(ip_address, port_number);
+
+  client.serverSend(sock, "ready");
+
+  string message = client.receive(sock);
+
+  if (message == "please upload data")
+  {
+    cout << message << endl;
+    return;
+  }
+  else if (message == "please classify the data")
+  {
+    cout << message << endl;
+    return;
+  }
+  else
+  {
+    cout << client.receive(sock);
+    string path;
+    cin.ignore();
+    getline(cin, path);
+    struct stat info;
+    // path does not exist.
+    if (stat(path.c_str(), &info) != 0)
+    {
+      client.serverSend(sock, "***invalid_path");
+      cout << client.receive(sock);
+      return;
+    }
+    // path exists and is a directory
+    else if (info.st_mode & S_IFDIR)
+    {
+      client.serverSend(sock, "***valid_path");
+    }
+    // path exists but isnt a directory
+    else
+    {
+      client.serverSend(sock, "***invalid_path");
+      cout << client.receive(sock);
+      return;
+    }
+
+    client.serverSend(sock, "ready");
+
+    path=path+"prediction.txt";
+
+    std::ofstream file;
+
+    file.open(path, std::ios::out);
+
+    while (true)
+    {
+      sleep(0.01);
+      string line = client.receive(sock);
+      if (line=="***done")
+      {
+        break;
+      }
+      file << line <<endl;
+      client.serverSend(sock, "ready");
+    }
+
+    file.close();
+  }
+}
 /*
 The Client class initialized by char* ip_address, int port_number.
 the cleint use the port number and ip address to connect the server and send him the buffer.
@@ -79,7 +148,7 @@ string Client::receive(int sock)
   char buffer[4096];
   memset(buffer, 0, sizeof(buffer));
   int expected_data_len = sizeof(buffer);
-  int read_bytes = recv(sock, buffer, expected_data_len, 0);
+  int read_bytes = recv(sock, buffer, expected_data_len, MSG_PEEK);
   if (read_bytes == 0)
   {
     // connection is closed.
@@ -93,10 +162,18 @@ string Client::receive(int sock)
   }
   else
   {
+
     buffer[read_bytes] = '\0';
     return buffer;
   }
 }
+
+string Client::new_Thread_Recieve(int sock)
+{
+  
+
+}
+
 
 /*
 The main function get as inputs: int argc, char* argv[], while int argc is the number of parameters in argv[],
@@ -239,7 +316,7 @@ int main()
       }
       else
       {
-        client.serverSend(sock,"ready");
+        client.serverSend(sock, "ready");
 
         while (true)
         {
@@ -254,27 +331,8 @@ int main()
         }
       }
     }
-    else if(output=="***download")
+    else if (output == "***download")
     {
-      client.serverSend(sock, "ready");
-
-      string message = client.receive(sock);
-
-      if (message == "please upload data")
-      {
-        cout << message << endl;
-        continue;
-      }
-      else if (message == "please classify the data")
-      {
-        cout << message << endl;
-        continue;
-      }
-      else
-      {
-
-      }
-
     }
     else
     {
