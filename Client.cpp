@@ -18,7 +18,7 @@ using namespace std;
 
 #include "Client.h"
 
-void command5(int sock, const char *ip_address, const int port_number)
+void command5(int sock, char *ip_address, int port_number)
 {
   Client client(ip_address, port_number);
 
@@ -38,7 +38,7 @@ void command5(int sock, const char *ip_address, const int port_number)
   }
   else
   {
-    cout << message<<endl;
+    cout << message << endl;
     string path;
     cin.ignore();
     getline(cin, path);
@@ -47,7 +47,7 @@ void command5(int sock, const char *ip_address, const int port_number)
     if (stat(path.c_str(), &info) != 0)
     {
       client.serverSend(sock, "***invalid_path");
-      cout << client.receive(sock)<<endl;
+      cout << client.receive(sock) << endl;
       return;
     }
     // path exists and is a directory
@@ -59,14 +59,14 @@ void command5(int sock, const char *ip_address, const int port_number)
     else
     {
       client.serverSend(sock, "***invalid_path");
-      cout << client.receive(sock)<<endl;
+      cout << client.receive(sock) << endl;
       return;
     }
 
     client.receive(sock);
-    client.serverSend(sock,"ready");
+    client.serverSend(sock, "ready");
 
-    path=path+"/prediction.txt";
+    path = path + "/prediction.txt";
 
     std::ofstream file;
 
@@ -76,11 +76,11 @@ void command5(int sock, const char *ip_address, const int port_number)
     {
       sleep(0.01);
       string line = client.receive(sock);
-      if (line=="***done")
+      if (line == "***done")
       {
         break;
       }
-      file << line <<endl;
+      file << line << endl;
       client.serverSend(sock, "ready");
     }
 
@@ -92,7 +92,7 @@ The Client class initialized by char* ip_address, int port_number.
 the cleint use the port number and ip address to connect the server and send him the buffer.
 */
 
-Client::Client(const char *ip_address, const int port_number)
+Client::Client(char *ip_address, int port_number)
 {
   this->ip_address = ip_address;
   this->port_number = port_number;
@@ -171,7 +171,6 @@ string Client::receive(int sock)
   }
 }
 
-
 /*
 The main function get as inputs: int argc, char* argv[], while int argc is the number of parameters in argv[],
 and char* argv[] is the array with the parameters of ip_address and port_number.
@@ -181,174 +180,173 @@ argv[2] - is the port_number.
 with the port number and ip address the client connect to the server and send to server the buffer with the user input.
 */
 
-int main()
+int main(int argc, char *argv[])
 {
-  // int argc, char* argv[]
-  const char *ip_address = "127.0.0.1";
-  const int port_number = 5555;
-  /*
-    struct in_addr addr;
-    int result = inet_pton(AF_INET, ip_address, &addr);
-    // check if ip adress can be converted. if not, return error
-    if (!result) {
-      cout << "Error: invalid IP address" << std::endl;
-      exit(1);
-    }
-  */
+ char *ip_address = argv[1];
+ int port_number = stoi(argv[2]);
 
-  if (!(port_number >= 1024 && port_number <= 65535))
+  struct in_addr addr;
+  int result = inet_pton(AF_INET, ip_address, &addr);
+  // check if ip adress can be converted. if not, return error
+  if (!result)
   {
-    cout << "Error: invalid port_number" << std::endl;
+    cout << "Error: invalid IP address" << std::endl;
     exit(1);
   }
 
-  Client client = Client(ip_address, port_number);
-
-  int sock = client.serverConnect();
-
-  while (true)
-  {
-    string menu = client.receive(sock);
-    cout << endl;
-    cout << menu << endl;
-    string command;
-    cin >> command;
-    client.serverSend(sock, command);
-
-    string output = client.receive(sock);
-
-    if (output == "***upload_file")
+    if (!(port_number >= 1024 && port_number <= 65535))
     {
-      output = client.receive(sock);
-      cout << output << endl;
-      string train_file;
-      cin >> train_file;
-      // getline(cink, trainfile)
-      fstream fin;
-      // open csv file with specific path as file_name
-      fin.open(train_file, ios::in);
-      // returns error if file cannot be opened
-      if (fin.fail())
-      {
-        client.serverSend(sock, "***invalid_file");
-        cout << client.receive(sock) << endl;
-        continue;
-      }
-
-      client.serverSend(sock, "***valid_file");
-      string line;
-      // reads every line of csv file
-      while (getline(fin, line))
-      {
-        sleep(0.01);
-        client.serverSend(sock, line);
-        client.receive(sock);
-        line.clear();
-      }
-      sleep(0.01);
-      client.serverSend(sock, "***done");
-
-      output = client.receive(sock);
-      if (output == "***invalid file")
-      {
-        cout << "invalid input";
-        continue;
-      }
-      cout << output << endl; // please upload next file msg
-
-      string test_file;
-      cin >> test_file;
-      fstream fin2;
-      // open csv file with specific path as file_name
-      fin2.open(test_file, ios::in);
-      // returns error if file cannot be opened
-      if (fin2.fail())
-      {
-        client.serverSend(sock, "***invalid_file");
-        cout << client.receive(sock) << endl;
-        continue;
-      }
-
-      client.serverSend(sock, "***valid_file");
-      line.clear();
-      // reads every line of csv file
-      while (getline(fin2, line))
-      {
-        sleep(0.01);
-        client.serverSend(sock, line);
-        client.receive(sock);
-        line.clear();
-      }
-      sleep(0.01);
-      client.serverSend(sock, "***done");
-
-      output = client.receive(sock);
-      if (output == "***invalid file")
-      {
-        cout << "invalid input";
-        continue;
-      }
-      cout << output << endl;
+      cout << "Error: invalid port_number" << std::endl;
+      exit(1);
     }
-    else if (output == "***classify")
-    {
-      client.serverSend(sock, "ready");
-      cout << client.receive(sock) << endl;
-    }
-    else if (output == "***display")
-    {
-      client.serverSend(sock, "ready");
 
-      string message = client.receive(sock);
+    Client client = Client(ip_address, port_number);
 
-      if (message == "please upload data")
+    int sock = client.serverConnect();
+
+    while (true)
+    {
+      string menu = client.receive(sock);
+      cout << endl;
+      cout << menu << endl;
+      string command;
+      cin >> command;
+      client.serverSend(sock, command);
+
+      string output = client.receive(sock);
+
+      if (output == "***upload_file")
       {
-        cout << message << endl;
-        continue;
+        output = client.receive(sock);
+        cout << output << endl;
+        string train_file;
+        cin >> train_file;
+        // getline(cink, trainfile)
+        fstream fin;
+        // open csv file with specific path as file_name
+        fin.open(train_file, ios::in);
+        // returns error if file cannot be opened
+        if (fin.fail())
+        {
+          client.serverSend(sock, "***invalid_file");
+          cout << client.receive(sock) << endl;
+          continue;
+        }
+
+        client.serverSend(sock, "***valid_file");
+        string line;
+        // reads every line of csv file
+        while (getline(fin, line))
+        {
+          sleep(0.01);
+          client.serverSend(sock, line);
+          client.receive(sock);
+          line.clear();
+        }
+        sleep(0.01);
+        client.serverSend(sock, "***done");
+
+        output = client.receive(sock);
+        if (output == "***invalid file")
+        {
+          cout << "invalid input";
+          continue;
+        }
+        cout << output << endl; // please upload next file msg
+
+        string test_file;
+        cin >> test_file;
+        fstream fin2;
+        // open csv file with specific path as file_name
+        fin2.open(test_file, ios::in);
+        // returns error if file cannot be opened
+        if (fin2.fail())
+        {
+          client.serverSend(sock, "***invalid_file");
+          cout << client.receive(sock) << endl;
+          continue;
+        }
+
+        client.serverSend(sock, "***valid_file");
+        line.clear();
+        // reads every line of csv file
+        while (getline(fin2, line))
+        {
+          sleep(0.01);
+          client.serverSend(sock, line);
+          client.receive(sock);
+          line.clear();
+        }
+        sleep(0.01);
+        client.serverSend(sock, "***done");
+
+        output = client.receive(sock);
+        if (output == "***invalid file")
+        {
+          cout << "invalid input";
+          continue;
+        }
+        cout << output << endl;
       }
-      else if (message == "please classify the data")
+      else if (output == "***classify")
       {
-        cout << message << endl;
-        continue;
+        client.serverSend(sock, "ready");
+        cout << client.receive(sock) << endl;
       }
-      else
+      else if (output == "***display")
       {
         client.serverSend(sock, "ready");
 
-        while (true)
+        string message = client.receive(sock);
+
+        if (message == "please upload data")
         {
-          sleep(0.01);
-          output = client.receive(sock);
-          cout << output << endl;
-          if (output == "Done.\n")
-          {
-            break;
-          }
+          cout << message << endl;
+          continue;
+        }
+        else if (message == "please classify the data")
+        {
+          cout << message << endl;
+          continue;
+        }
+        else
+        {
           client.serverSend(sock, "ready");
+
+          while (true)
+          {
+            sleep(0.01);
+            output = client.receive(sock);
+            cout << output << endl;
+            if (output == "Done.\n")
+            {
+              break;
+            }
+            client.serverSend(sock, "ready");
+          }
+        }
+      }
+      else if (output == "***download")
+      {
+
+        thread t(command5, sock, ip_address, port_number);
+        t.join();
+      }
+      else
+      {
+        // user enters k and metric...
+        cout << output << endl;
+        string input;
+        cin.ignore();
+        getline(cin, input);
+        client.serverSend(sock, input);
+        string valid = client.receive(sock);
+        if (valid == "***invalid")
+        {
+          client.serverSend(sock, "ready");
+          cout << client.receive(sock) << endl;
         }
       }
     }
-    else if (output == "***download")
-    {
-  
-      thread t(command5,sock,ip_address,port_number);
-      t.join();
-    
-    }
-    else
-    {
-      //user enters k and metric...
-      cout << output << endl;
-      string input;
-      cin.ignore();
-      getline(cin, input);
-      client.serverSend(sock, input);
-      string valid = client.receive(sock);
-      if (valid=="***invalid")
-      {
-      client.serverSend(sock,"ready");
-      cout << client.receive(sock) << endl;
-      }
-    }
   }
-}
+

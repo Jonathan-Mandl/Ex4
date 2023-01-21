@@ -70,13 +70,12 @@ int Server::acceptClient(int sock)
 }
 
 
-int main()
+int main(int argc, char* argv[])
 {
-    //int argc, char* argv[]
 
-    const int server_port=5555;
+    int server_port=stoi(argv[1]);
 
-     if (!(server_port>=1024 && server_port<=65535))
+    if (!(server_port>=1024 && server_port<=65535))
     {
     cout << "Error: invalid port_number" << endl;
     exit(1);

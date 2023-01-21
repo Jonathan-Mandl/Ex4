@@ -10,7 +10,7 @@ class Server{
 
 public:
 
-Server(const int server_port);
+Server(int server_port);
 
 int createSock();
 
