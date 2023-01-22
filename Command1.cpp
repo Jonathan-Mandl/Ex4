@@ -98,6 +98,7 @@ void Command1::execute()
     if (valid == "***invalid_file")
     {
         dio->write("invalid input");
+        dio->read();
         return;
     }
     bool allLinesAreGood = true;
@@ -134,6 +135,7 @@ void Command1::execute()
     if (!allLinesAreGood)
     {
         dio->write("***invalid file");
+        dio->read();
         return;
     }
 
@@ -145,8 +147,8 @@ void Command1::execute()
     {
         Xexamples.clear();
         Yexamples.clear();
-        sleep(0.01);
         dio->write("invalid input");
+        dio->read();
         return;
     }
 
@@ -187,8 +189,10 @@ void Command1::execute()
     if (!allLinesAreGood)
     {
         dio->write("***invalid file");
+        dio->read();
         return;
     }
 
     dio->write("Upload complete.");
+    dio->read();
 }

@@ -231,6 +231,7 @@ int main(int argc, char *argv[])
         {
           client.serverSend(sock, "***invalid_file");
           cout << client.receive(sock) << endl;
+          client.serverSend(sock,"done");
           continue;
         }
 
@@ -251,6 +252,7 @@ int main(int argc, char *argv[])
         if (output == "***invalid file")
         {
           cout << "invalid input";
+          client.serverSend(sock,"done");
           continue;
         }
         cout << output << endl; // please upload next file msg
@@ -265,6 +267,7 @@ int main(int argc, char *argv[])
         {
           client.serverSend(sock, "***invalid_file");
           cout << client.receive(sock) << endl;
+          client.serverSend(sock,"done");
           continue;
         }
 
@@ -285,9 +288,11 @@ int main(int argc, char *argv[])
         if (output == "***invalid file")
         {
           cout << "invalid input";
+          client.serverSend(sock,"done");
           continue;
         }
         cout << output << endl;
+        client.serverSend(sock,"done");
       }
       else if (output == "***classify")
       {
