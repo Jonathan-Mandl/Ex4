@@ -72,7 +72,7 @@ int Server::acceptClient(int sock)
 
 int main(int argc, char* argv[])
 {
-
+    
     int server_port=stoi(argv[1]);
 
     if (!(server_port>=1024 && server_port<=65535))

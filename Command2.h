@@ -11,8 +11,9 @@ using namespace std;
 class Command2 : public Command{
     int& k;
     string& metric;
+    std::vector<std::vector<double>>& Xexamples;
 
     public:
-    Command2(DefaultIO* dio,int& k,string& metric);
+    Command2(DefaultIO* dio,int& k,string& metric,std::vector<std::vector<double>>& Xexamples);
     void execute() override;
 };

@@ -8,14 +8,16 @@
 
 using namespace std;
 
-Command2::Command2(DefaultIO *dio, int &k, string &metric)
+Command2::Command2(DefaultIO *dio, int &k, string &metric,std::vector<std::vector<double>>& Xexamples)
     : Command("algorithm settings", dio),
-      metric(metric), k(k)
+      metric(metric), k(k), Xexamples(Xexamples)
 {
 }
 
 void Command2::execute()
 {
+    dio->write("***algorithm");
+    dio->read();
     dio->write("The current KNN parameters are: k= " + to_string(this->k) + ", distance metric = " + this->metric);
     // user should enter k, space and then distance metric name.
     string parameters = dio->read();
@@ -39,12 +41,13 @@ void Command2::execute()
             dio->write("***invalid");
             dio->read();
             dio->write("invalid value for K");
+            dio->read();
             return;
         }
 
         string metric_value;
         getline(s_stream, metric_value, ' ');
-        if (ceil(k_value) == floor(k_value) && k_value > 0 &&
+        if (ceil(k_value) == floor(k_value) && k_value > 0 && !(Xexamples.size()>0 && k_value>Xexamples.size()) &&
             (metric_value == "AUC" || metric_value == "MAN" || metric_value == "CHB" || metric_value == "CAN" || metric_value == "MIN"))
         {
             this->k = k_value;
@@ -55,17 +58,19 @@ void Command2::execute()
         }
         else
         {
-            if (ceil(k_value) != floor(k_value) || k_value <= 0)
+            if (ceil(k_value) != floor(k_value) || k_value <= 0 || (Xexamples.size()>0 && k_value>Xexamples.size()))
             {
                 dio->write("***invalid");
                 dio->read();
                 dio->write("invalid value for K");
+                dio->read();
             }
             else
             {
                 dio->write("***invalid");
                 dio->read();
                 dio->write("invalid value for metric");
+                dio->read();
             }
         }
     }

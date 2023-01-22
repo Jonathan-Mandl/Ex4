@@ -26,6 +26,7 @@ void Command3::execute(){
     if (this->Xexamples.size()==0 || this->Yexamples.size()==0 || XtoClassify.size()==0)
     {
         dio->write("please upload data");
+        dio->read();
         return;
     }
 
@@ -46,5 +47,6 @@ void Command3::execute(){
     }
 
     dio->write("classifying data complete");
+    dio->read();
     
 }

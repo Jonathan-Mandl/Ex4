@@ -7,7 +7,7 @@ CLI::CLI(DefaultIO* dio) : dio(dio)
     this->k=5;
     this->metric="AUC";
     commands[0] = new Command1(dio, Xexamples, Yexamples, XtoClassify);
-    commands[1]= new Command2(dio,k,metric);
+    commands[1]= new Command2(dio,k,metric,Xexamples);
     commands[2]= new Command3(dio, Xexamples,Yexamples,XtoClassify,Yresults,metric,k);
     commands[3]= new Command4(dio,Xexamples,Yexamples,XtoClassify,Yresults);
     commands[4]= new Command5(dio,Xexamples,Yexamples,XtoClassify,Yresults);
@@ -35,13 +35,33 @@ void CLI::start()
              // todo show menu
             string input = dio->read();
 
-            if(stoi(input)==8)
+            int command;
+
+            try
             {
+            command=stoi(input);
+            }
+            catch(exception&)
+            {
+                dio->write("continue");
+                dio->read();
+                continue;
+            }
+
+            if(command==8)
+            {   
                 break;
             }
-            // todo make sure it's valid number in range...
-            commands[stoi(input)-1]->execute();
-            sleep(0.1);
+
+            if(command>=1 && command<=5)
+            {
+            commands[command-1]->execute();
+            }
+            else{
+                dio->write("continue");
+                dio->read();
+            }
+
         }
         }
         catch(exception&)

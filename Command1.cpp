@@ -178,7 +178,7 @@ void Command1::execute()
     {
         for (const std::vector<double> &vec : XtoClassify)
         {
-            if (vec.size() != XtoClassify[0].size())
+            if (vec.size() != Xexamples[0].size())
             {
                 allLinesAreGood = false;
                 break;

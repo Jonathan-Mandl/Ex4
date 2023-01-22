@@ -20,10 +20,12 @@ void Command5::execute()
     if (Xexamples.size() == 0 || Yexamples.size() == 0 || XtoClassify.size() == 0)
     {
         dio->write("please upload data");
+        dio->read();
     }
     else if (Yresults.size() == 0)
     {
         dio->write("please classify the data");
+        dio->read();
     }
     else
     {
