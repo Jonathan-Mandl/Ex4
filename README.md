@@ -22,4 +22,4 @@ In the project we use the functions and classes from the last exercise, and add 
  - SocketIO.cpp
  - DefaultIO.h
 
-
+The class CLI.cpp is the program that manage the menue.
