@@ -33,7 +33,7 @@ Command4.o: Command4.cpp Command4.h
 Command5.o: Command5.cpp Command5.h
 	g++ -pthread -std=c++11 -c Command5.cpp
 
-SocketIo.o: SocketIO.cpp SocketIO.h
+SocketIO.o: SocketIO.cpp SocketIO.h
 	g++ -pthread -std=c++11 -c SocketIO.cpp
 
 Distance.o: Distance.cpp Distance.h
