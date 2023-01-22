@@ -217,7 +217,8 @@ int main(int argc, char *argv[])
 
       if (output == "***upload_file")
       {
-        output = client.receive(sock);
+        client.serverSend(sock,"ready");
+        output=client.receive(sock);
         cout << output << endl;
         string train_file;
         cin >> train_file;
@@ -350,6 +351,9 @@ int main(int argc, char *argv[])
         {
           client.serverSend(sock, "ready");
           cout << client.receive(sock) << endl;
+        }
+        else{
+          client.serverSend(sock, "end");
         }
       }
     }

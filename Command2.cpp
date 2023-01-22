@@ -20,8 +20,6 @@ void Command2::execute()
     // user should enter k, space and then distance metric name.
     string parameters = dio->read();
 
-    sleep(0.1);
-
     if (parameters == "***end")
     {
         return;
@@ -52,6 +50,8 @@ void Command2::execute()
             this->k = k_value;
             this->metric = metric_value;
             dio->write("***valid");
+            dio->read();
+            return;
         }
         else
         {
