@@ -1,7 +1,7 @@
 all: server.out client.out
 
 server.out: Server.o Input.o Distance.o Knn.o CLI.o Command.o Command1.o Command2.o Command3.o Command4.o Command5.o SocketIO.o
-	g++ -std=c++11 Input.o Distance.o Knn.o Server.o -o server.out
+	g++ -std=c++11 Input.o Distance.o Knn.o CLI.o Command.o Command1.o Command2.o Command3.o Command4.o Command5.o SocketIO.o Server.o -o server.out 
 
 client.out: Client.o
 	g++ -std=c++11 Client.o -o client.out
@@ -33,7 +33,7 @@ Command4.o: Command4.cpp Command4.h
 Command5.o: Command5.cpp Command5.h
 	g++ -std=c++11 -c Command5.cpp
 
-SocketIo.o: SocketIO.cpp SocketIO.h
+SocketIO.o: SocketIO.cpp SocketIO.h
 	g++ -std=c++11 -c SocketIO.cpp
 
 Distance.o: Distance.cpp Distance.h
