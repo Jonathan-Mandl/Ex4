@@ -210,7 +210,6 @@ int main(int argc, char *argv[])
     cout << endl;
     cout << menu << endl;
     string command;
-    cin.ignore();
     getline(cin,command);
     client.serverSend(sock, command);
 
@@ -222,7 +221,6 @@ int main(int argc, char *argv[])
       output = client.receive(sock);
       cout << output << endl;
       string train_file;
-      cin.ignore();
       getline(cin,train_file);
       fstream fin;
       // open csv file with specific path as file_name
@@ -259,7 +257,6 @@ int main(int argc, char *argv[])
       cout << output << endl; // please upload next file msg
 
       string test_file;
-      cin.ignore();
       getline(cin,test_file);
       fstream fin2;
       // open csv file with specific path as file_name
@@ -349,7 +346,6 @@ int main(int argc, char *argv[])
       output=client.receive(sock);
       cout << output << endl;
       string input;
-      cin.ignore();
       getline(cin, input);
       if (input == "")
       {
