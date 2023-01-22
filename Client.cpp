@@ -50,6 +50,7 @@ void command5(int sock, char *ip_address, int port_number)
     {
       client.serverSend(sock, "***invalid_path");
       cout << client.receive(sock) << endl;
+      client.serverSend(sock, "continue");
       return;
     }
     // path exists and is a directory

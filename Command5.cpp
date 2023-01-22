@@ -34,6 +34,7 @@ void Command5::execute()
         if(valid=="***invalid_path")
         {
             dio->write("Invalid file path");
+            dio->read();
             return;
         }
 
