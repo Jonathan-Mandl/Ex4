@@ -1,6 +1,6 @@
 # Ex4
 
-In this project we implement manue options for the user that use the server-clint connection and compute knn algorithem. In the project we use the functions and classes from the last exercise, and add new classes to manege the manue options. The menue allow to choose one of 6 options:
+In this project we implement manue options for the user that use the server-clint connection and compute knn algorithem. The menue allow to choose one of 6 options:
 
  1) upload unclssified csv file.
  2) algorithem settings.
@@ -10,3 +10,6 @@ In this project we implement manue options for the user that use the server-clin
  6) exit.
 
 
+In the project we use the functions and classes from the last exercise, and add new classes to manege the manue options. The new classes is:
+ - CLI.cpp
+ - 
