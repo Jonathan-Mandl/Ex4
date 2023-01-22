@@ -1,4 +1,4 @@
-all: server.out client.out
+all:: server.out client.out
 
 server.out: Server.o Input.o Distance.o Knn.o CLI.o Command.o Command1.o Command2.o Command3.o Command4.o Command5.o SocketIO.o
 	g++ -std=c++11 Input.o Distance.o Knn.o CLI.o Command.o Command1.o Command2.o Command3.o Command4.o Command5.o SocketIO.o Server.o -o server.out 
