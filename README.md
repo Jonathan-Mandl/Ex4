@@ -12,4 +12,9 @@ In this project we implement manue options for the user that use the server-clin
 
 In the project we use the functions and classes from the last exercise, and add new classes to manege the manue options. The new classes is:
  - CLI.cpp
- - 
+ - Command.cpp
+ - Command1.cpp
+ - Command2.cpp
+ - Command3.cpp
+ - Command4.cpp
+ - Command5.cpp
