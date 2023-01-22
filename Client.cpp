@@ -42,7 +42,6 @@ void command5(int sock, char *ip_address, int port_number)
   {
     cout << message << endl;
     string path;
-    cin.ignore();
     getline(cin, path);
     struct stat info;
     // path does not exist.
