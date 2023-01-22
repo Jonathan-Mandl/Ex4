@@ -18,5 +18,7 @@ In the project we use the functions and classes from the last exercise, and add 
  - Command3.cpp
  - Command4.cpp
  - Command5.cpp
+ - StandardIO.cpp
+ - SocketIO.cpp
 
 
