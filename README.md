@@ -37,4 +37,22 @@ The Command1.cpp class is the option if the user enter 1 to upload unclssified c
 
 
 
-The Command2.cpp class is the option if the user enter 2 to define algorithem settings.
+The Command2.cpp class is the option if the user enter 2 to define algorithem settings. The functions in that class is:
+
+ - Command2()
+ - execute()
+ 
+ 
+ 
+ The Command3.cpp class is the option if the user enter 3 to classify data. The functions in that class is:
+  - Command3()
+  - execute() 
+
+
+The Command4.cpp class is the option if the user enter 4 to display results. The functions in that class is:
+ - Command4()
+ - execute()
+
+The Command5.cpp class is the option if the user enter 5 to download results. The functions in that class is:
+ - Command4()
+ - execute()
