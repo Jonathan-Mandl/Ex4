@@ -31,8 +31,8 @@ The Command.cpp class is an abstractic class that all of the other commands clas
 
 The Command1.cpp class is the option if the user enter 1 to upload unclssified csv file. In this case the client wait for the user to enter CSV file with X,Y examples and thire classifications.  The functions in that class is:
  - Command1() - init of the command1 obejct.
- - readExample(string line, vector<vector<double>> &Xexamples,vector<string> &Yexamples) - this function get as inputs line from the csv, and 2 double vector for X,Y featurs. the function קnter to the vector the featurs. it also save the lable of these featurs. 
- - readTest() - 
+ - readExample() - this function get as inputs line from the csv, and 2 double vector for X,Y featurs. the function enter to the vector the featurs. it also save the lable of these featurs. 
+ - readTest() - read from the test csv points for the test to classify. 
  - execute() -
 
 
