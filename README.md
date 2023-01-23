@@ -40,7 +40,7 @@ The Command1.cpp class is the option if the user enter 1 to upload unclssified c
 The Command2.cpp class is the option if the user enter 2 to define algorithem settings. The functions in that class is:
 
  - Command2() - init command2 obejct.
- - execute() - read from the server the current parameters of K and metric function and print them to the user. after that if the user push enter we stay the parameters and not change it. else if the user enter valid K value and valid metric function, the programe update the paramters and send them ro the server.
+ - execute() - read from the server the current parameters of K and metric function and print them to the user. after that if the user press enter we stay the parameters and not change it. else if the user enter valid K value and valid metric function, the programe update the paramters and send them ro the server.
  
  
  
