@@ -30,7 +30,7 @@ The Command.cpp class is an abstractic class that all of the other commands clas
  - Command(string description, DefaultIO* dio) - init of the command obejct.
 
 The Command1.cpp class is the option if the user enter 1 to upload unclssified csv file. In this case the client wait for the user to enter CSV file with X,Y examples and thire classifications.  The functions in that class is:
- - Command1() - init of the command1 obejct.
+ - Command1() - the init of command1 obejct.
  - readExample() - this function get as inputs line from the csv, and 2 double vector for X,Y featurs. the function enter to the vector the featurs. it also save the lable of these featurs. 
  - readTest() - read from the test csv points for the test to classify. 
  - execute() -
@@ -39,20 +39,20 @@ The Command1.cpp class is the option if the user enter 1 to upload unclssified c
 
 The Command2.cpp class is the option if the user enter 2 to define algorithem settings. The functions in that class is:
 
- - Command2()
+ - Command2() - the init of command2 obejct.
  - execute()
  
  
  
  The Command3.cpp class is the option if the user enter 3 to classify data. The functions in that class is:
-  - Command3()
+  - Command3() - the init of command3 obejct.
   - execute() 
 
 
 The Command4.cpp class is the option if the user enter 4 to display results. The functions in that class is:
- - Command4()
+ - Command4() - the init of command4 obejct.
  - execute()
 
 The Command5.cpp class is the option if the user enter 5 to download results. The functions in that class is:
- - Command4()
+ - Command5() - the init of command5 obejct.
  - execute()
