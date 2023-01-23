@@ -22,4 +22,4 @@ In the project we use the functions and classes from the last exercise, and add 
  - SocketIO.cpp
  - DefaultIO.h
 
-The CLI.cpp class is the program that manage the menue. It use commands array that contain command objects.
+The CLI.cpp class is the program that manage the menue. It use commands array that contain command objects sutable to the menue optins. that mean for option 1 the commans contain object type command1, for option 2 the commans contain object type command2, ect..
