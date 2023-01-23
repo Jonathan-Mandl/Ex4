@@ -39,20 +39,20 @@ The Command1.cpp class is the option if the user enter 1 to upload unclssified c
 
 The Command2.cpp class is the option if the user enter 2 to define algorithem settings. The functions in that class is:
 
- - Command2() - the init of command2 obejct.
+ - Command2() - init command2 obejct.
  - execute()
  
  
  
  The Command3.cpp class is the option if the user enter 3 to classify data. The functions in that class is:
-  - Command3() - the init of command3 obejct.
+  - Command3() - init command3 obejct.
   - execute() 
 
 
 The Command4.cpp class is the option if the user enter 4 to display results. The functions in that class is:
- - Command4() - the init of command4 obejct.
+ - Command4() - init command4 obejct.
  - execute()
 
 The Command5.cpp class is the option if the user enter 5 to download results. The functions in that class is:
- - Command5() - the init of command5 obejct.
+ - Command5() - init command5 obejct.
  - execute()
