@@ -29,4 +29,4 @@ The Command.cpp class is an abstractic class that all of the other commands clas
  - getDescription() - that reurn string that descript the command.
  - Command(string description, DefaultIO* dio) - init of the obejc of command.
 
-The Command1.cpp class is the option if the user enter 1 to upload unclssified csv file. In this case the client wait for the user to enter the the CSV file with X,Y examples and thire classifications.
+The Command1.cpp class is the option if the user enter 1 to upload unclssified csv file. In this case the client wait for the user to enter CSV file with X,Y examples and thire classifications.
