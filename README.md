@@ -46,7 +46,7 @@ The Command2.cpp class is the option if the user enter 2 to define algorithem se
  
  The Command3.cpp class is the option if the user enter 3 to classify data. The functions in that class is:
   - Command3() - init command3 obejct.
-  - execute() - active the knn algorithem on the csv file that the user upload. if the user didnt upload csv file the programe ask from the user to upload them.
+  - execute() - active the knn algorithem on the data from the csv file that the user upload. if the user didnt upload csv file the programe ask from the user to upload them.
 
 
 The Command4.cpp class is the option if the user enter 4 to display results. The functions in that class is:
