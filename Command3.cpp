@@ -29,6 +29,12 @@ void Command3::execute(){
         dio->read();
         return;
     }
+    if(this->k>this->Xexamples.size())
+    {
+        dio->write("invalid input for k: k is larger than the number of examples");
+        dio->read();
+        return;
+    }
 
     Knn knn(this->metric,this->k);
 
