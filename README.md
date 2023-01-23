@@ -22,5 +22,5 @@ In the project we use the functions and classes from the last exercise, and add 
  - SocketIO.cpp
  - DefaultIO.h
 
-The CLI.cpp class is the program that manage the menue. It use commands array that contain command objects sutable to the menue optins. that mean for option 1 the commans contain object type command1, for option 2 the commans contain object type command2, ect..
+The CLI.cpp class is the program that manage the menue. It use commands array that contain command objects sutable to the menue options. that mean for option 1 the commans contain object type command1, for option 2 the commans contain object type command2, ect..
 In total the commands array contain 5 object of the 5 option manue (except the exit option). In the start of the function the class print to the user a message : "Welcome to the KNN Classifier Server. Please choose an option:" and print below the all options in the manue. The printing of every option is made by get_descriptio() fuction that defined to every command class.
