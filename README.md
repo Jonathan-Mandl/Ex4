@@ -26,7 +26,7 @@ The CLI.cpp class is the program that manage the menue. It use commands array th
 In total the commands array contain 5 object of the 5 option manue (except the exit option). In the start of the function the class print to the user a message : "Welcome to the KNN Classifier Server. Please choose an option:" and print below the all options in the manue. The printing of every option is made by get_descriptio() fuction that defined to every command class. After the user enter his choise (number between 1-5 or 8) we check which option is sutable to the user input and active the rellevant command class. if the user input is not a number or its number but not between 1-5 or 8, we send to the client "continue" and then the client continu in loop and printing the manue again. The constructor deletes every command in the commands array.
 
 The Command.cpp is an abstractic class that all of the other commands classes inherited from her. The functionד in Command.cpp class is:
-getDescription() - that reurn string that descript the command.
-Command(string description, DefaultIO* dio) - init of the obejc of command.
+ - getDescription() - that reurn string that descript the command.
+ - Command(string description, DefaultIO* dio) - init of the obejc of command.
 
 The Command1.cpp class is the option if the user enter 1 to upload unclssified csv file. In this case the client wait for the user to enter the the CSV file with X,Y examples and thire classifications.
