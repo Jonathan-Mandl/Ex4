@@ -18,7 +18,7 @@ using namespace std;
 // this is called from a new thread, so it's run in parallel
 void handleClient(int client_sock) {
     SocketIO sio(client_sock);
-    CLI cli(&sio);
+    CLI cli(&sio, client_sock);
     cli.start();
 }
 

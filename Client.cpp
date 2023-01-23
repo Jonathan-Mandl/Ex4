@@ -43,25 +43,23 @@ void command5(int sock, char *ip_address, int port_number)
     cout << message << endl;
     string path;
     getline(cin, path);
-    struct stat info;
-    // path does not exist.
-    if (stat(path.c_str(), &info) != 0)
+     fstream fin;
+    // open csv file with specific path as file_name
+    fin.open(path, ios::in);
+    // returns error if file cannot be opened
+    if (fin.fail())
     {
       client.serverSend(sock, "***invalid_path");
       cout << client.receive(sock) << endl;
       client.serverSend(sock, "continue");
       return;
+
     }
-    // path exists and is a directory
-    else if (info.st_mode & S_IFDIR)
-    {
-      client.serverSend(sock, "***valid_path");
-      path = path + "/predictions.txt";
-    }
-    // path exists but isnt a directory, meaning it is for a specific file
+    // path exists 
     else
     {
       client.serverSend(sock, "***valid_path");
+      fin.close();
     }
 
     client.receive(sock);
@@ -155,7 +153,7 @@ string Client::receive(int sock)
   {
     // connection is closed.
     close(sock);
-    throw std::exception();
+    exit(1);
   }
   else if (read_bytes < 0)
   {

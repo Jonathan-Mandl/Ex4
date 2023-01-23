@@ -2,7 +2,7 @@
 #include "CLI.h"
 #include <unistd.h>
 
-CLI::CLI(DefaultIO* dio) : dio(dio) 
+CLI::CLI(DefaultIO* dio,int client_sock) : dio(dio), client_sock(client_sock)
 {
     this->k=5;
     this->metric="AUC";
@@ -47,9 +47,16 @@ void CLI::start()
                 dio->read();
                 continue;
             }
+            if(!(input.find_first_not_of("0123456789") == std::string::npos))
+            {
+                dio->write("continue");
+                dio->read();
+                continue;
+            }
 
             if(command==8)
-            {   
+            {
+                close(this->client_sock); 
                 break;
             }
 

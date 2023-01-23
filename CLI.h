@@ -15,6 +15,7 @@ class CLI{
     std::vector<std::string> Yresults;
 
     int k;
+    int client_sock;
     std::string metric;
 
     DefaultIO* dio;
@@ -25,7 +26,7 @@ class CLI{
 
     void start();
 
-    CLI(DefaultIO* dio);
+    CLI(DefaultIO* dio,int client_sock);
 
     ~CLI();
 };
