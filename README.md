@@ -56,4 +56,4 @@ The Command4.cpp class is the option if the user enter 4 to display results. The
 
 The Command5.cpp class is the option if the user enter 5 to download results. The functions in that class is:
  - Command5() - init command5 obejct.
- - execute() - get from the user local path to creat file with the results of the knn algorithem on the data.
+ - execute() - get from the user local path to creat file with the results of the knn algorithem on the classify data.
