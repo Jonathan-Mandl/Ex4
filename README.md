@@ -9,7 +9,7 @@ In this project we implement manue options for the user that use the server-clin
  5) download result.
  6) exit.
 
-# implementation
+## implementation
 
 In the project we use the functions and classes from the last exercise, and add new classes to manege the manue options. The new classes is:
  - CLI.cpp
@@ -46,3 +46,6 @@ The Command5.cpp class is the option if the user enter 5 to download results to 
  The StandardIO.cpp class is to define that the data read() with cin and write() with cout as the commend line.
  
  The SocketIO.cpp class is define that we read from the socket and write to the socket of the server.
+
+ 
+ ## Compliation Instructions
