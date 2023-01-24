@@ -28,6 +28,7 @@ In total the commands array contain 5 object of the 5 option manue (except the e
 The Command.cpp class is an abstractic class that all of the other commands classes inherited from her. The functions in that class is:
  - getDescription() - that reurn string that descript the command.
  - Command(string description, DefaultIO* dio) - init of the command obejct.
+ 
 
 The Command1.cpp class is the option if the user enter 1 to upload unclssified csv file. In this case the client wait for the user to enter CSV file with X,Y examples and thire classifications.  The functions in that class is:
  - Command1() - the init of command1 obejct.
@@ -55,4 +56,4 @@ The Command4.cpp class is the option if the user enter 4 to display results. The
 
 The Command5.cpp class is the option if the user enter 5 to download results. The functions in that class is:
  - Command5() - init command5 obejct.
- - execute() - get from the user local path to creat file with the results of the knn algorithem on the data to classify.
+ - execute() - get from the user local path to creat file with the results of the knn algorithem on the data.
