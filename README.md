@@ -43,8 +43,7 @@ The Command2.cpp class is the option if the user enter 2 to define algorithem se
 
  - Command2() - init command2 obejct.
  
- The Command3.cpp class is the option if the user enter 3 to classify data. The execute() function active the knn algorithem on the data from the csv file that the user upload. if the user didnt upload csv file the programe ask from the user to upload them.
-  - Command3() - (DefaultIO* dio,vector<vector<double>>& Xexamples, vector<string>& Yexamples, vector<vector<double>>& XtoClassify, vector<string>& Yresults, string& metric, int& k, and super class command initiation.
+ The Command3.cpp class is the option if the user enter 3 to classify data. The execute() function active the knn algorithem on the data from the csv file that the user upload. if the user didnt upload csv file the programe ask from the user to upload them. The init function Command3() get as argument: DefaultIO* dio,vector<vector<double>>& Xexamples, vector<string>& Yexamples, vector<vector<double>>& XtoClassify, vector<string>& Yresults, string& metric, int& k, and super class command initiation.
  
 The Command4.cpp class is the option if the user enter 4 to display results. The execute() function print the results of the knn algorithem from the data to classify. The init function Command5() get as argument : DefaultIO *dio, vector<vector<double>> &Xexamples, vector<vector<double>> &Yexamples , vector<vector<double>> &XtoClassify, vector<string> &Yresults, and super class command initiation.
 
