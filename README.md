@@ -39,11 +39,10 @@ The Command1.cpp class is the option if the user enter 1 to upload unclssified c
 
 
 
-The Command2.cpp class is the option if the user enter 2 to define algorithem settings.  The execute() function read from the server the current parameters of K and metric function and print them to the user. after that if the user press enter we stay the parameters and not change it. else if the user enter valid K value and valid metric function, the programe update the paramters and send them ro the server. if one of the parameters or both are invalid, the programe print to the user error message. 
-
- - Command2() - init command2 obejct.
+The Command2.cpp class is the option if the user enter 2 to define algorithem settings.  The execute() function read from the server the current parameters of K and metric function and print them to the user. after that if the user press enter we stay the parameters and not change it. else if the user enter valid K value and valid metric function, the programe update the paramters and send them ro the server. if one of the parameters or both are invalid, the programe print to the user error message. The init fuction Command2() get as arguments: DefaultIO *dio, int &k, string &metric,vector<vector<double>>& Xexamples), and super class command initiation.
+    
  
- The Command3.cpp class is the option if the user enter 3 to classify data. The execute() function active the knn algorithem on the data from the csv file that the user upload. if the user didnt upload csv file the programe ask from the user to upload them. The init function Command3() get as argument: DefaultIO* dio,vector<vector<double>>& Xexamples, vector<string>& Yexamples, vector<vector<double>>& XtoClassify, vector<string>& Yresults, string& metric, int& k, and super class command initiation.
+The Command3.cpp class is the option if the user enter 3 to classify data. The execute() function active the knn algorithem on the data from the csv file that the user upload. if the user didnt upload csv file the programe ask from the user to upload them. The init function Command3() get as argument: DefaultIO* dio,vector<vector<double>>& Xexamples, vector<string>& Yexamples, vector<vector<double>>& XtoClassify, vector<string>& Yresults, string& metric, int& k, and super class command initiation.
  
 The Command4.cpp class is the option if the user enter 4 to display results. The execute() function print the results of the knn algorithem from the data to classify. The init function Command5() get as argument : DefaultIO *dio, vector<vector<double>> &Xexamples, vector<vector<double>> &Yexamples , vector<vector<double>> &XtoClassify, vector<string> &Yresults, and super class command initiation.
 
