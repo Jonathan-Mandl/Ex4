@@ -56,3 +56,14 @@ The Command5.cpp class is the option if the user enter 5 to download results to 
   - In command5.cpp same as command4.cpp.
  
  ## Compliation Instructions
+ In order to compile and run the project from the terminal, the user should type the make command. This will run the makefile and compile server.out and client.out programs. To run server program, the user should type:
+
+./server.out file_name port_number
+
+Where the file_name is the name of the csv file with vectors and labels, and port_number is the port that the server would use for the program.
+
+To run client program, the user should type:
+
+./client.out ip port_number
+
+Where ip is the ip adress of the server and port_number is the port_number that the server would use for the program.
