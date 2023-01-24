@@ -48,6 +48,8 @@ The Command5.cpp class is the option if the user enter 5 to download results to 
  The SocketIO.cpp class is define that we read from the socket and write to the socket of the server.
 
  ## Valid user input
+ In the code we check that the inputs and parameters are vailds:
+ 
  
  
  ## Compliation Instructions
