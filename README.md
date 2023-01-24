@@ -40,3 +40,8 @@ The Command4.cpp class is the option if the user enter 4 to display results. The
 
 The Command5.cpp class is the option if the user enter 5 to download results to local path. The execute() function get from the user local path to creat file with the results of the knn algorithem on the classify data. The init function Command5() get as argument : DefaultIO *dio, vector<vector<double>> &Xexamples, vector<vector<double>> &Yexamples , vector<vector<double>> &XtoClassify, vector<string> &Yresults, and super class command initiation.
 
+ The DefaultIO.h is an abstract class that contain read() and write() fuctions to read and write data.
+ 
+ The StandardIO.cpp class is to define that the data read() with cin and write() with cout as the commend line.
+ 
+ The SocketIO.cpp class is define that we read from the socket and write to the socket of the server.
