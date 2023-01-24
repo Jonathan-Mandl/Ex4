@@ -11,12 +11,15 @@ Command5::Command5(DefaultIO *dio, std::vector<std::vector<double>> &Xexamples,
       Yexamples(Yexamples), XtoClassify(XtoClassify)
 {
 }
-
+/*
+this method asks client to enter file path and sends to client the labels of test file.
+client should add the text to the specified file path.
+*/
 void Command5::execute()
 {
     dio->write("***download");
     dio->read();
-
+//if data is not uploaded or classified, it sends message to client.
     if (Xexamples.size() == 0 || Yexamples.size() == 0 || XtoClassify.size() == 0)
     {
         dio->write("please upload data");
