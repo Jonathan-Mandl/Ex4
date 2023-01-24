@@ -42,19 +42,19 @@ The Command1.cpp class is the option if the user enter 1 to upload unclssified c
 The Command2.cpp class is the option if the user enter 2 to define algorithem settings. The functions in that class is:
 
  - Command2() - init command2 obejct.
- - The execute() function read from the server the current parameters of K and metric function and print them to the user. after that if the user press enter we stay the parameters and not change it. else if the user enter valid K value and valid metric function, the programe update the paramters and send them ro the server. if one of the parameters or both are invalid, the programe print to the user error message. 
+ - execute() function read from the server the current parameters of K and metric function and print them to the user. after that if the user press enter we stay the parameters and not change it. else if the user enter valid K value and valid metric function, the programe update the paramters and send them ro the server. if one of the parameters or both are invalid, the programe print to the user error message. 
  
  
  
  The Command3.cpp class is the option if the user enter 3 to classify data. 
-  - The execute() function active the knn algorithem on the data from the csv file that the user upload. if the user didnt upload csv file the programe ask from the user to upload them.
+  - execute() function active the knn algorithem on the data from the csv file that the user upload. if the user didnt upload csv file the programe ask from the user to upload them.
   - Command3() - init command3 obejct.
  
 The Command4.cpp class is the option if the user enter 4 to display results. 
- - The execute() function print the results of the knn algorithem from the data to classify.
+ - execute() function print the results of the knn algorithem from the data to classify.
  - Command4() - init command4 obejct.
 
 The Command5.cpp class is the option if the user enter 5 to download results to local path. 
- - The execute() function get from the user local path to creat file with the results of the knn algorithem on the classify data.
+ - execute() function get from the user local path to creat file with the results of the knn algorithem on the classify data.
  - Command5() - init command5 obejct.
 
