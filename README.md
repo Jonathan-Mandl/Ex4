@@ -49,6 +49,5 @@ The Command2.cpp class is the option if the user enter 2 to define algorithem se
 The Command4.cpp class is the option if the user enter 4 to display results. The execute() function print the results of the knn algorithem from the data to classify.
  - Command4() - init command4 obejct.
 
-The Command5.cpp class is the option if the user enter 5 to download results to local path. The execute() function get from the user local path to creat file with the results of the knn algorithem on the classify data.
- - Command5() - init of command5 obejct, get as argument : DefaultIO *dio, vector<vector<double>> &Xexamples, vector<vector<double>> &Yexamples , vector<vector<double>> &XtoClassify, vector<string> &Yresults
+The Command5.cpp class is the option if the user enter 5 to download results to local path. The execute() function get from the user local path to creat file with the results of the knn algorithem on the classify data. The init function Command5() get as argument : DefaultIO *dio, vector<vector<double>> &Xexamples, vector<vector<double>> &Yexamples , vector<vector<double>> &XtoClassify, vector<string> &Yresults
 
