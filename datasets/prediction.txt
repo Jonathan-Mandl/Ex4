@@ -1,0 +1,9 @@
+1	red wine
+2	red wine
+3	red wine
+4	white wine
+5	white wine
+6	white wine
+7	Sparkling wine
+8	Sparkling wine
+9	Sparkling wine

@@ -1,0 +1,1 @@
+/usr/bin/g++   -pthread -g  -rdynamic CMakeFiles/client.dir/Client.cpp.o  -o client 
