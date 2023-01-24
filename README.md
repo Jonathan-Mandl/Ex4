@@ -30,14 +30,8 @@ The Command.cpp class is an abstractic class that all of the other commands clas
  - Command(string description, DefaultIO* dio) - init of the command obejct.
  
 
-
 The Command1.cpp class is the option if the user enter 1 to upload unclssified csv file. In this case the client wait for the user to enter CSV file with X,Y examples and thire classifications.  The functions in that class is:
- - The init function Command1() get as argument: DefaultIO *dio, vector<vector<double>> &Xexamples, vector<string> &Yexamples, vector<vector<double>> &XtoClassify, and super class command initiation.
-    
- - readExample() - this function get as inputs line from the csv, and 2 double vector for X,Y featurs. the function enter to the vector the featurs. it also save the lable of these featurs. 
- - readTest() - read from the test csv points for the test to classify. 
- - execute() -
-
+ - The init function Command1() get as argument: DefaultIO *dio, vector<vector<double>> &Xexamples, vector<string> &Yexamples, vector<vector<double>> &XtoClassify, and super class command initiation. The execute() function get from the user local path to csv file to upload in the server. The readExample() function get as inputs line from the csv, and 2 double vector for X,Y featurs. the function enter to the vector the featurs. it also save the lable of these featurs. The readTest() function read from the test csv points for the test to classify. 
 
 
 The Command2.cpp class is the option if the user enter 2 to define algorithem settings.  The execute() function read from the server the current parameters of K and metric function and print them to the user. after that if the user press enter we stay the parameters and not change it. else if the user enter valid K value and valid metric function, the programe update the paramters and send them ro the server. if one of the parameters or both are invalid, the programe print to the user error message. The init fuction Command2() get as arguments: DefaultIO *dio, int &k, string &metric,vector<vector<double>>& Xexamples), and super class command initiation.
