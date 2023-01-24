@@ -53,5 +53,6 @@ The Command5.cpp class is the option if the user enter 5 to download results to 
   - In command2.cpp if the user enter invalid metrik function or k value not in the range or both the program print "invalid value for metric" and " invalid value for K" and return to the main manue.
   - In command3.cpp if the user try to active the knn algorithem befor the upload of csv file, the program print "data upload please" and return to the main manue.
   - In command4.cpp if the user try to get the clssify of the data befor active the knn algorithem or befor the upload of csv file, the program print "data upload please" or "please classify the data" in suit.
+  - In command5.cpp same as command4.cpp.
  
  ## Compliation Instructions
