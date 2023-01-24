@@ -83,7 +83,11 @@ bool Command1::readTest(string line, std::vector<std::vector<double>> &XtoClassi
 
     return isOk;
 }
-
+/*
+this method asks client to upload train file and test file.
+checks for file validity by making sure all vector are number and
+are in the same length.
+*/
 void Command1::execute()
 {
     Xexamples.clear();
@@ -117,7 +121,7 @@ void Command1::execute()
         }
         dio->write("read");
     }
-
+    //checks vectors are valid.
     if (Xexamples.size() == 0)
         allLinesAreGood = false;
     if (allLinesAreGood)

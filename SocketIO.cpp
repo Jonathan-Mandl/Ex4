@@ -16,7 +16,9 @@ SocketIO::SocketIO(int client_sock) : client_sock(client_sock)
 {
     
 }
-
+/*
+this method reads data from client through socket using recieve() function.
+*/
 string SocketIO::read(){
     char buffer[4096];
     memset(buffer, 0, sizeof(buffer));
@@ -37,7 +39,7 @@ string SocketIO::read(){
     return buffer;
     }
 }
-
+//this method writes data to client using socket and send() function.
 void SocketIO::write(string output)
 {
     int sent_bytes= send(client_sock, output.c_str(), output.length(), 0);

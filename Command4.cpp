@@ -10,7 +10,10 @@ Command4::Command4(DefaultIO *dio, std::vector<std::vector<double>> &Xexamples,
       Yexamples(Yexamples), XtoClassify(XtoClassify)
 {
 }
-
+/*
+this method sends labels of test file vectors to client with line number (tab separated).
+it send each line separately. in case the files are not uploaded or classified it sends message to client.
+*/
 void Command4::execute()
 {
     dio->write("***display");
@@ -31,7 +34,7 @@ void Command4::execute()
 
         dio->write("send");
         dio->read();
-
+        //sends to client line of line number and label in test file separated by tabs
         for (int i = 0; i < Yresults.size(); i++)
         {
             sleep(0.01);

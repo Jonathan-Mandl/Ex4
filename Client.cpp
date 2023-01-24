@@ -17,7 +17,11 @@
 using namespace std;
 
 #include "Client.h"
-
+/*
+this method allows user to enter file path. is then adds lines from 
+server that contain test file labels to the specified path. it also checks
+for the validity of the path.
+*/
 void command5(int sock, char *ip_address, int port_number)
 {
   Client client(ip_address, port_number);
@@ -29,13 +33,13 @@ void command5(int sock, char *ip_address, int port_number)
   if (message == "please upload data")
   {
     cout << message << endl;
-    client.serverSend(sock,"returning");
+    client.serverSend(sock, "returning");
     return;
   }
   else if (message == "please classify the data")
   {
     cout << message << endl;
-    client.serverSend(sock,"returning");
+    client.serverSend(sock, "returning");
     return;
   }
   else
@@ -43,7 +47,7 @@ void command5(int sock, char *ip_address, int port_number)
     cout << message << endl;
     string path;
     getline(cin, path);
-     fstream fin;
+    fstream fin;
     // open csv file with specific path as file_name
     fin.open(path, ios::in);
     // returns error if file cannot be opened
@@ -53,9 +57,8 @@ void command5(int sock, char *ip_address, int port_number)
       cout << client.receive(sock) << endl;
       client.serverSend(sock, "continue");
       return;
-
     }
-    // path exists 
+    // path exists
     else
     {
       client.serverSend(sock, "***valid_path");
@@ -180,6 +183,15 @@ with the port number and ip address the client connect to the server and send to
 int main(int argc, char *argv[])
 {
   char *ip_address = argv[1];
+   try
+    {
+        stoi(argv[2]);
+    }
+    catch (exception &)
+    {
+        perror("server port must be an int");
+        exit(1);
+    }
   int port_number = stoi(argv[2]);
 
   struct in_addr addr;
@@ -203,22 +215,25 @@ int main(int argc, char *argv[])
 
   while (true)
   {
+    // presents menue that recieves through server communication in socket.
     string menu = client.receive(sock);
     cout << endl;
     cout << menu << endl;
     string command;
-    getline(cin,command);
+    getline(cin, command);
+    // send command entered by user to server.
     client.serverSend(sock, command);
 
     string output = client.receive(sock);
-
+    // if recieves signal ***upload file from server command 1, it will recieve train and test file from user
+    // reads every line from train and test file and sends to server.
     if (output == "***upload_file")
     {
       client.serverSend(sock, "ready");
       output = client.receive(sock);
       cout << output << endl;
       string train_file;
-      getline(cin,train_file);
+      getline(cin, train_file);
       fstream fin;
       // open csv file with specific path as file_name
       fin.open(train_file, ios::in);
@@ -254,7 +269,7 @@ int main(int argc, char *argv[])
       cout << output << endl; // please upload next file msg
 
       string test_file;
-      getline(cin,test_file);
+      getline(cin, test_file);
       fstream fin2;
       // open csv file with specific path as file_name
       fin2.open(test_file, ios::in);
@@ -290,12 +305,21 @@ int main(int argc, char *argv[])
       cout << output << endl;
       client.serverSend(sock, "done");
     }
+    /*
+    if signal ***classify from command 3 is received, it will print message from server
+    that says classfying process is complete.
+    */
     else if (output == "***classify")
     {
       client.serverSend(sock, "ready");
       cout << client.receive(sock) << endl;
-      client.serverSend(sock,"returning");
+      client.serverSend(sock, "returning");
     }
+    /*
+    if signal display from server command4 is recieved, this code
+    will print message from server if the data was not uploaded or classified. Or else, print
+    all labels of test file if the data is classified already.
+    */
     else if (output == "***display")
     {
       client.serverSend(sock, "ready");
@@ -305,13 +329,13 @@ int main(int argc, char *argv[])
       if (message == "please upload data")
       {
         cout << message << endl;
-        client.serverSend(sock,"returning");
+        client.serverSend(sock, "returning");
         continue;
       }
       else if (message == "please classify the data")
       {
         cout << message << endl;
-        client.serverSend(sock,"returning");
+        client.serverSend(sock, "returning");
         continue;
       }
       else
@@ -331,16 +355,24 @@ int main(int argc, char *argv[])
         }
       }
     }
+    /*
+    if signal ***download received from command5, this code will create new thread to handle
+    the behavior of client in command 5
+    */
     else if (output == "***download")
     {
 
       thread t(command5, sock, ip_address, port_number);
       t.join();
     }
-    else if(output=="***algorithm")
+    /*
+    if signal ***algorithm is received from command 2, this code will print message from server
+    with parameters and allow user to enter new parameters and send them to server.
+    */
+    else if (output == "***algorithm")
     {
-      client.serverSend(sock,"ready");
-      output=client.receive(sock);
+      client.serverSend(sock, "ready");
+      output = client.receive(sock);
       cout << output << endl;
       string input;
       getline(cin, input);
@@ -362,7 +394,9 @@ int main(int argc, char *argv[])
         client.serverSend(sock, "end");
       }
     }
-    else{
+    // in case no signal is recieved from any command.
+    else
+    {
       client.serverSend(sock, "continue");
     }
   }
