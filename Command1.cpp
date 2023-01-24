@@ -140,6 +140,8 @@ void Command1::execute()
     {
         dio->write("***invalid file");
         dio->read();
+        Xexamples.clear();
+        Yexamples.clear();
         return;
     }
 
@@ -194,6 +196,9 @@ void Command1::execute()
     {
         dio->write("***invalid file");
         dio->read();
+        Xexamples.clear();
+        Yexamples.clear();
+        XtoClassify.clear();
         return;
     }
 
