@@ -2,6 +2,10 @@
 #include "CLI.h"
 #include <unistd.h>
 
+
+// initiation of CLI()
+
+
 CLI::CLI(DefaultIO* dio,int client_sock) : dio(dio), client_sock(client_sock)
 {
     this->k=5;
@@ -12,6 +16,9 @@ CLI::CLI(DefaultIO* dio,int client_sock) : dio(dio), client_sock(client_sock)
     commands[3]= new Command4(dio,Xexamples,Yexamples,XtoClassify,Yresults);
     commands[4]= new Command5(dio,Xexamples,Yexamples,XtoClassify,Yresults);
 }
+
+// distractor of CLI()
+
 
 CLI::~CLI() 
 {
