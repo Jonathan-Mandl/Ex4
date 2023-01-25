@@ -42,6 +42,11 @@ void CLI::start()
              // todo show menu
             string input = dio->read();
 
+            if (input=="***continue")
+            {
+                continue;
+            }
+
             int command;
 
             try

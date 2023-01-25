@@ -222,6 +222,13 @@ int main(int argc, char *argv[])
     string command;
     getline(cin, command);
     // send command entered by user to server.
+    
+    if (command=="")
+    {
+      client.serverSend(sock, "***continue");
+      continue;
+    }
+    
     client.serverSend(sock, command);
 
     string output = client.receive(sock);
