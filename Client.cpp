@@ -18,7 +18,7 @@ using namespace std;
 
 #include "Client.h"
 /*
-this method allows user to enter file path. is then adds lines from 
+this method allows user to enter file path. is then adds lines from
 server that contain test file labels to the specified path. it also checks
 for the validity of the path.
 */
@@ -47,11 +47,10 @@ void command5(int sock, char *ip_address, int port_number)
     cout << message << endl;
     string path;
     getline(cin, path);
-    fstream fin;
-    // open csv file with specific path as file_name
-    fin.open(path, ios::in);
-    // returns error if file cannot be opened
-    if (fin.fail())
+    ofstream file;
+    file.open(path, ios::out | ios::trunc);
+
+    if (!file.is_open())
     {
       client.serverSend(sock, "***invalid_path");
       cout << client.receive(sock) << endl;
@@ -62,15 +61,11 @@ void command5(int sock, char *ip_address, int port_number)
     else
     {
       client.serverSend(sock, "***valid_path");
-      fin.close();
     }
 
     client.receive(sock);
     client.serverSend(sock, "ready");
 
-    std::ofstream file;
-
-    file.open(path, std::ios::out);
 
     while (true)
     {
@@ -183,15 +178,15 @@ with the port number and ip address the client connect to the server and send to
 int main(int argc, char *argv[])
 {
   char *ip_address = argv[1];
-   try
-    {
-        stoi(argv[2]);
-    }
-    catch (exception &)
-    {
-        perror("server port must be an int");
-        exit(1);
-    }
+  try
+  {
+    stoi(argv[2]);
+  }
+  catch (exception &)
+  {
+    perror("server port must be an int");
+    exit(1);
+  }
   int port_number = stoi(argv[2]);
 
   struct in_addr addr;
@@ -222,13 +217,13 @@ int main(int argc, char *argv[])
     string command;
     getline(cin, command);
     // send command entered by user to server.
-    
-    if (command=="")
+
+    if (command == "")
     {
       client.serverSend(sock, "***continue");
       continue;
     }
-    
+
     client.serverSend(sock, command);
 
     string output = client.receive(sock);
