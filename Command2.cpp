@@ -65,6 +65,14 @@ void Command2::execute()
         else
         {
             //if k or metric aren't valid sends invalid value message to client.
+            if((ceil(k_value) != floor(k_value) || k_value <= 0 || (Xexamples.size()>0 && k_value>Xexamples.size())) && !(metric_value == "AUC" || metric_value == "MAN" || metric_value == "CHB" || metric_value == "CAN" || metric_value == "MIN"))
+            {
+                dio->write("***invalid");
+                dio->read();
+                dio->write("invalid value for K\ninvalid value for metric");
+                dio->read();
+                return;
+            }
             if (ceil(k_value) != floor(k_value) || k_value <= 0 || (Xexamples.size()>0 && k_value>Xexamples.size()))
             {
                 dio->write("***invalid");
@@ -72,7 +80,7 @@ void Command2::execute()
                 dio->write("invalid value for K");
                 dio->read();
             }
-            else
+            if(!(metric_value == "AUC" || metric_value == "MAN" || metric_value == "CHB" || metric_value == "CAN" || metric_value == "MIN"))
             {
                 dio->write("***invalid");
                 dio->read();
